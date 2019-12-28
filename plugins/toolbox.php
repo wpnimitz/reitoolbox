@@ -444,7 +444,7 @@ function toolbox_city_pages_callback() {
 	$ret .=  '<div class="extra-keywords" id="sortable">';
 	$city_count = 2;
 	for ($i=2; $i < count($city_pages["names"]); $i++) { 
-		$ret .= city_pages_field('City #<span>' . $city_count '</span>', true, $city_count);
+		$ret .= city_pages_field('City #<span>' . $city_count . '</span>', true, $city_count);
 		$city_count++;
 	}
 	$ret .=  '</div>';

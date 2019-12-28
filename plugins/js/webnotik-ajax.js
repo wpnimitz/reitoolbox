@@ -33,7 +33,7 @@ jQuery(document).ready(function( $ ) {
         $("#extra-" + extraSub + " label").attr('for', 'webnotik_keywords_subpages' + extraSub);
         $("#extra-" + extraSub + " input").attr('id', 'webnotik_keywords_subpages' + extraSub);
         $("#extra-" + extraSub + " input").attr('value', '');
-        $("#extra-" + extraSub + " .k-main input").attr('value', 'City #' + extraSub);
+        $("#extra-" + extraSub + " .k-main input").attr('value', 'City Name');
 
         $(".main-sub-keyword").attr("data-new", extraSub - 1); //temporary deduct one.
 
