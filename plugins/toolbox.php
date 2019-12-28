@@ -114,8 +114,8 @@ function rename_city_pages_callback() {
 		// Let's Update the Post
 		$my_post = array(
 			'ID'           => $mypost_id,
-			'post_title'   => 'We Buy Houses ' . $new_title,
-			'post_name'	   => str_replace(" ", "-", strtolower('We Buy Houses ' . $new_title)) 
+			'post_title'   => 'We Buy Houses in ' . $new_title,
+			'post_name'	   => str_replace(" ", "-", strtolower('We Buy Houses in ' . $new_title)) 
 		);
 
 		// Update the post into the database
@@ -367,8 +367,8 @@ function show_toolbox_content_callback() {
 	$ret .= toolbox_fields('text', 'Business Address Line 1', 'general', array('help' => '[webnotik business="address_line_1"]'));
 	$ret .= toolbox_fields('text', 'Business Address Line 2', 'general', array('help' => '[webnotik business="address_line_2"]'));
 	$ret .= toolbox_fields('text', 'Business Logo URL', 'general', array('help' => '[webnotik business="logo_url"]'));
-	$ret .= toolbox_fields('text', 'Privacy URL', 'general',  array('help' => '[webnotik business="privacy_url"]'));
-	$ret .= toolbox_fields('text', 'Terms of Use URL', 'general', array('help' => '[webnotik business="terms_of_use_url"]'));
+	$ret .= toolbox_fields('text', 'Privacy URL', 'general',  array('help' => '[legal_pages for="privacy"]'));
+	$ret .= toolbox_fields('text', 'Terms of Use URL', 'general', array('help' => '[legal_pages for="terms"]'));
 
 	$ret .= get_submit_button();
 	echo toolbox_content($ret, 'general');

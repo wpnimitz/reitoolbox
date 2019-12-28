@@ -28,8 +28,7 @@ if(!empty($main_branding_color)) {
 	}
 	';
 	$css .= '
-	.cta a,
-	.webnotik-pages .thank-you-page .et_pb_button {   
+	.cta a {   
 		background: '.$main_branding_color.';
 		padding: 15px 20px!important;
 	    border-radius: 3px;
@@ -54,15 +53,34 @@ if(!empty($form_header_background)) {
 	.webnotik-pages .form-header-hero,
 	.webnotik-pages .form-hero .form-header,
 	.single .form-header-hero .form-header,
-	.single .form-hero .form-header,
-	.webnotik-pages .thank-you-page.et_pb_fullwidth_header,
-	.et_pb_section.thank-you-page {
+	.single .form-hero .form-header{
 	    background: '.$form_header_background.';
 	    
 	}';
 }
 
-if($remove_header_bottom_padding == "Yes") {
+if(!empty($special_page_background_color)) {
+	$css .= '
+	.webnotik-pages .thank-you-page.et_pb_fullwidth_header,
+	.webnotik-pages .special-page.et_pb_fullwidth_header,
+	.et_pb_section.special-page, 
+	.et_pb_section.thank-you-page {
+	    background: '.$form_header_background.';
+	}';
+
+	$css .= '
+	.webnotik-pages .thank-you-page .et_pb_button,
+	.webnotik-pages .special-page .et_pb_button {
+		background: '.$special_page_button_background_color.';
+	}';
+	$css .= '
+	.webnotik-pages .thank-you-page .et_pb_button:hover,
+	.webnotik-pages .special-page .et_pb_button:hover {
+		background: '.$special_page_button_hover_background_color.';
+	}';
+}
+
+if($remove_header_bottom_padding == "yes") {
 	$css .= '
 	.form-header {
 	    padding-bottom: 0 !important;

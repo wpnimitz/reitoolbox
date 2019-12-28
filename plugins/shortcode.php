@@ -85,25 +85,62 @@ function webnotik_business_shortcode( $atts ){
 	$business = $atts["business"];
 	$type = $atts["type"];
 	$text = $atts["text"];
+	$ret = '';
 
-	$allowed_types = array("name", "phone_number", "email_address", "address", "address_line_1", "address_line_2", "logo_url", "privacy_url", "terms_of_use_url");
+	if($business == "weburl") {
+		return get_site_url();
+	}
+
+	$allowed_types = array("weburl","name", "phone_number", "email_address", "address", "address_line_1", "address_line_2", "logo_url");
+
 	if(in_array($business, $allowed_types)) {
 		$business_data = get_option( 'general' );
 
-		if(!empty($business_data['business' . $business])) {
-			$ret = $business_data['business' . $business];
-		} else (!empty($business_data[$business])) {
+		if(!empty($business_data['business_' . $business])) {
+			$ret = $business_data['business_' . $business];
+		} elseif(!empty($business_data[$business])) {
 			$ret = $business_data[$business];
 		} else {
 			if($business == 'address') {
 				$ret = $business_data["business_address_line_1"] . ', ' . $business_data["business_address_line_2"];
+			} else {
+				$ret = '--';
 			}
 		}
 	}
-	return $ret;	
+	if($type != 'html') {
+		return $ret;
+	} else {
+
+		return '<span class="info-'.$business.'">'.$ret.'</span>';
+	}
+		
 }
 add_shortcode( 'webnotik', 'webnotik_business_shortcode' );
 
+function webnotik_legal_pages( $atts ){  
+	$atts = shortcode_atts(
+		array(
+			'for' => 'privacy',
+			'text' => 'Privacy Policy' //supports url as well
+		), $atts, 'legal_pages' );
+	$for = $atts["for"];
+	$text = $atts["text"];
+
+	$allowed_types = array("privacy", "terms");
+	if(in_array($for, $allowed_types)) {
+		$business_data = get_option( 'general' );
+		$url = $business_data['privacy_url'];
+		if($for != 'privacy') {$url = $business_data['terms_of_use_url'];}
+
+		if(!empty($text)) {
+			return '<a href="'.$url.'">'.$text.'</a>';
+		} else {
+			return $url;
+		}
+	}
+}
+add_shortcode( 'legal_pages', 'webnotik_legal_pages' );
 
 function webnotik_city_pages( $atts ){
 	$atts = shortcode_atts(
