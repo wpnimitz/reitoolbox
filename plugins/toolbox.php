@@ -308,11 +308,11 @@ function toolbox_branding_callback() {
 
 	echo toolbox_content($ret, 'branding');
 
-	// $branding = get_option('toolbox-branding');
+	$branding = get_option('toolbox-branding');
 
-	// echo '<pre>';
-	// print_r($branding);
-	// echo '</pre>';
+	echo '<pre>';
+	print_r($branding);
+	echo '</pre>';
 }
 
 function toolbox_forms_callback() {
