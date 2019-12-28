@@ -308,7 +308,7 @@ function toolbox_branding_callback() {
 
 	echo toolbox_content($ret, 'branding');
 
-	$branding = get_option('toolbox-branding');
+	$branding = get_option('branding');
 
 	echo '<pre>';
 	print_r($branding);
