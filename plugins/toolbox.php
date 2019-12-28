@@ -443,10 +443,10 @@ function toolbox_city_pages_callback() {
 	$ret .=  '<p>In this section, you can rename, delete and even clone your currrent city page landing page. Just make sure you provide the correct name and correct url to make it work properly.</p>';
 	
 	$ret .= city_pages_field('Main State');
-	city_pages_field('City #1', true, 1, 'main-sub-keyword');
+	$ret .= city_pages_field('City #1', true, 1, 'main-sub-keyword');
 	$ret .=  '<div class="extra-keywords" id="sortable">';
-	$city_count = 1;
-	for ($i=1; $i < count($city_pages["names"]); $i++) { 
+	$city_count = 2;
+	for ($i=2; $i < count($city_pages["names"]); $i++) { 
 		$ret .= city_pages_field('City #' . $city_count, true, $city_count);
 		$city_count++;
 	}
