@@ -189,36 +189,24 @@ function webnotik_city_keywords( $atts ){
 		$item = "main";
 	}
 
-	//$page_id = get_the_ID();
-	$city_keyword = get_post_meta( $post->ID, 'city_keyword', true );
-
-	if($item == 'main') {
-		$keyword = get_option('webnotik_keywords_main');
-		$ret = $keyword;
-	} elseif (!empty($city_keyword) && !isset($_GET["et_fb"])) {
-		$ret = $city_keyword;
-	} else {
-		// $keyword = get_option('webnotik_keywords_subpages');
-		// $item = str_replace("city", '', $item);
-		// $try_keyword = $keyword[$item-1];
 		
 
-		$exclude_words = array( ' for ', ' my ', 'in ', 'In ', 'We ', 'Buy', 'Houses', 'House', 'Cash', 'Fast', 'Sell');
-    	$post_title = get_the_title($post->ID);
+	$exclude_words = array( ' for ', ' my ', 'in ', 'In ', 'We ', 'Buy', 'Houses', 'House', 'Cash', 'Fast', 'Sell');
+	$post_title = get_the_title($post->ID);
 
-    	foreach ($exclude_words as $ex_word) {
-    		$post_title = str_replace($ex_word, '', $post_title);
-    	}
-    	
-
-		if(!empty($post_title)) {
-			$ret = $post_title;
-		} else {
-			$ret = 'City Name';
-		}
-	}	
+	foreach ($exclude_words as $ex_word) {
+		$post_title = str_replace($ex_word, '', $post_title);
+	}
 	
-	return '<span class="city city-'.$post->ID.'">' . $ret . '</span>';
+
+	if(!empty($post_title)) {
+		$ret = $post_title;
+	} else {
+		$ret = 'City Name';
+	}
+	
+	
+	return '<span class="city city-'.$post_title.'">' . $ret . '</span>';
 
 }
 add_shortcode( 'city_keywords', 'webnotik_city_keywords' );
