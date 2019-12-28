@@ -300,6 +300,12 @@ function toolbox_branding_callback() {
 
 	$ret .= get_submit_button();
 	echo toolbox_content($ret, 'branding');
+
+	$branding = get_option('toolbox-branding');
+
+	echo '<pre>';
+	print_r($branding);
+	echo '</pre>';
 }
 
 function toolbox_forms_callback() {
