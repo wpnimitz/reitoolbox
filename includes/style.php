@@ -1,13 +1,18 @@
 <?php
-$css = '/**';
-$css .= 'Created on: ' . date("Y/m/d H:i:s");
-$css .= '**/';
-
-$css .= '';
-$css .= '';
 
 $branding = get_option('branding');
 extract($branding);
+
+$css = '/**';
+$css .= 'Created on: ' . date("Y/m/d H:i:s");
+
+foreach ($branding as $key => $value) {
+	$css .= $key . ': ' . $value;
+}
+
+$css .= '**/';
+
+
 
 if(empty($hero_background_image)) {
 	$hero_background_image = get_stylesheet_directory_uri() . '/assets/img/no-bg.jpg';
