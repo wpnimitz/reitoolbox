@@ -316,6 +316,8 @@ function toolbox_branding_callback() {
 }
 
 function toolbox_forms_callback() {
+	$forms = array("Seller Form", "Buyer Form", "Private Lending Form", "Contractor Form", "Realtors Form", "Wholesale Form", "Contact Form", "Extra Form");
+
 	$ret = toolbox_fields('textarea', 'Seller Form', 'forms', array('help' => '[webnotik_form type="seller_form"]', 'hint' => "In some instances, you may use lead source, this will help us gain more advantage for PPC landing pages. For reference, please check our Help & Guidelines section <a href='#'>here.</a>"));
 	$ret .= toolbox_fields('textarea', 'Buyer Form', 'forms', array('help' => '[webnotik_form type="buyer_form"]'));
 	$ret .= toolbox_fields('textarea', 'Private Lending Form', 'forms', array('help' => '[webnotik_form type="private_lending_form"]'));

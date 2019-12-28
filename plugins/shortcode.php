@@ -130,9 +130,10 @@ function webnotik_city_pages( $atts ){
 	$limit = $atts["limit"];
 	$column = $atts["column"];
 
+	$city_pages_data = get_option('city_pages');
 
-	$subpages = get_option('webnotik_keywords_subpages');
-	$subid = get_option('webnotik_keywords_subpages_ids');
+	$subpages = $city_pages_data["names"];
+	$subid = $city_pages_data["urls"];
 	$ret = '';
 
 	if($limit == 0){
@@ -146,7 +147,7 @@ function webnotik_city_pages( $atts ){
 		$ret .= '<ul class="column-'.$column.'">';
 	}
 
-	for ($i=0; $i < $limit_count; $i++) { 
+	for ($i=1; $i < $limit_count; $i++) { 
 
 		if($type == "list") {
 			$ret .= '<li><a href="'. $subid[$i] . '">'. $subpages[$i] . '</a></li>';
