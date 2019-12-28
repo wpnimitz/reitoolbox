@@ -100,6 +100,110 @@ function get_toolbox_option($name, $group) {
 	}
 }
 
+add_action( 'wp_ajax_rename_city_pages', 'rename_city_pages_callback' );
+function rename_city_pages_callback() {
+
+	$given_url = $_REQUEST["given_url"];
+	$slug = trim(parse_url($given_url, PHP_URL_PATH), '/');
+	
+	$page = get_page_by_path( $slug );
+	$mypost_id = $page->ID;
+	$new_title = $_REQUEST["given_title"];
+
+	if($mypost_id > 0) {
+		// Let's Update the Post
+		$my_post = array(
+			'ID'           => $mypost_id,
+			'post_title'   => 'We Buy Houses ' . $new_title,
+			'post_name'	   => str_replace(" ", "-", strtolower('We Buy Houses ' . $new_title)) 
+		);
+
+		// Update the post into the database
+		wp_update_post( $my_post );
+		update_post_meta($mypost_id, 'city_keyword', $new_title);
+
+		$success["post_title"] = 'We Buy Houses in ' . $new_title;
+		$success["post_name"] = get_the_permalink($mypost_id);
+		wp_send_json_success( $success );	
+
+	} else {
+		$error["given_title"] = "Title: " . $_REQUEST["given_title"];
+		$error["given_url"] = "URL: " . $_REQUEST["given_url"];		
+		$error["mypost_id"] = "ID: " . $page->ID;
+		wp_send_json_error( $error ); 
+	}
+}
+
+add_action( 'wp_ajax_clone_city_page', 'clone_city_page_callback' );
+function clone_city_page_callback() {
+
+	$given_url = $_REQUEST["given_url"];
+	$slug = trim(parse_url($given_url, PHP_URL_PATH), '/');
+	
+	$page = get_page_by_path( $slug );
+	$mypost_id = $page->ID;
+	$new_title = $_REQUEST["given_title"];
+
+	if($mypost_id > 0) {
+		// Create post object
+		$mypost = array(
+		  'post_title'    => get_the_title($mypost_id),
+		  'post_content'  => get_post_field('post_content', $mypost_id),
+		  'post_type'     => 'page',
+		  'post_status'   => 'publish',
+		  'post_author'   => get_current_user_id()
+		);
+		 
+		// Insert the post into the database
+		$new_post_id = wp_insert_post( $mypost );
+
+		// Copy post metadata
+		$data = get_post_custom($mypost_id);
+	    foreach ( $data as $key => $values) {
+	      foreach ($values as $value) {
+	        add_post_meta( $new_post_id, $key, $value );
+	      }
+	    }
+
+		$success["post_title"] = $new_title;
+		$success["post_name"] = get_the_permalink($new_post_id);
+		wp_send_json_success( $success );	
+
+	} else {
+		$error["given_title"] = "Title: " . $_REQUEST["given_title"];
+		$error["given_url"] = "URL: " . $_REQUEST["given_url"];		
+		$error["mypost_id"] = "ID: " . $page->ID;
+		wp_send_json_error( $error ); 
+	}
+}
+
+//actual ajax
+add_action( 'wp_ajax_get_city_pages', 'get_city_pages_callback' );
+function get_city_pages_callback() {
+    $json = array();
+
+
+    $query_args = array( 
+    	's' => 'we buy houses'
+    );
+	$query = new WP_Query( $query_args ); 
+
+	$record = 0;
+	foreach ($query->posts as $post) {
+		$slug = $post->post_name;
+		$title = $post->post_title;
+	    
+	    
+	    if( strpos($title, 'We Buy Houses') !== false ) {
+	    	$finalize_title = explode("We Buy Houses ", $title);	
+	    	$json[$record]["PageName"] = $finalize_title[1];
+	    	$json[$record]["PageURL"] = get_the_permalink( $post->ID );
+	    	$record++; 
+	    }
+	}
+    wp_send_json_success( $json );
+} 
+
 function city_pages_field($name, $action = false, $count = 0, $class = "") {
 	$label = $name;
 	$name = toolbox_create_slug($name, true);
