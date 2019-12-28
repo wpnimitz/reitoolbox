@@ -187,7 +187,7 @@ function webnotik_city_keywords( $atts ){
 
 	if(is_front_page()) {
 		$city_pages_data = get_option('city_pages');
-		$target = $city_pages_data["names"][1];
+		$target = $city_pages_data["names"][0];
 		return '<span class="city city-'.$target.'">' . $target . '</span>';
 	}
 
