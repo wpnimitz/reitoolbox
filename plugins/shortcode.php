@@ -1,5 +1,4 @@
 <?php
-
 function webnotik_form_shortcode( $atts ){  
 	$atts = shortcode_atts(
 		array(
@@ -87,33 +86,21 @@ function webnotik_business_shortcode( $atts ){
 	$type = $atts["type"];
 	$text = $atts["text"];
 
-	$allowed_types = array('name', 'phone', 'email', 'address1', 'address2', 'address', 'privacy', 'tos', 'weburl');
-
+	$allowed_types = array("name", "phone_number", "email_address", "address", "address_line_1", "address_line_2", "logo_url", "privacy_url", "terms_of_use_url");
 	if(in_array($business, $allowed_types)) {
-		$form = get_option( 'webnotik_business_' . $business);
-		if($form != "") {
-			if($type == "url") {
-				$ret = do_shortcode($form);
-			} else {
-				$ret = '<span class="webnotik-'.$business.'">'. do_shortcode($form) . '</span>';
-			}
+		$business_data = get_option( 'general' );
+
+		if(!empty($business_data['business' . $business])) {
+			$ret = $business_data['business' . $business];
+		} else (!empty($business_data[$business])) {
+			$ret = $business_data[$business];
 		} else {
 			if($business == 'address') {
-				$ret = '<span class="webnotik-'.$business.'">'. get_option( 'webnotik_business_address1') . ', '. get_option( 'webnotik_business_address2') . '</span>';
-			} elseif($business == 'weburl') {
-				$url = get_bloginfo('wpurl');
-				$ret = $url; 
-			} else {
-				$ret = "Business info is empty!";
+				$ret = $business_data["business_address_line_1"] . ', ' . $business_data["business_address_line_2"];
 			}
 		}
-	} else {
-		$ret = 'Business information is not part of the settings. Please review the code.';
 	}
-
-	return $ret;
-
-	
+	return $ret;	
 }
 add_shortcode( 'webnotik', 'webnotik_business_shortcode' );
 
