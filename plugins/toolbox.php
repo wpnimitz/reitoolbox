@@ -298,14 +298,21 @@ function toolbox_branding_callback() {
 	$ret .= toolbox_fields('text', 'Special Page Button Background Color', 'branding', false, false, 'wda_color_picker');
 	$ret .= toolbox_fields('text', 'Special Page Button Hover Background Color', 'branding', false, false, 'wda_color_picker');
 
+	
+
+
+	$ret .= '<div class="options">';
 	$ret .= get_submit_button();
+
+	$ret .= '<p class="submit"><a href="#" id="save-styles" class="button button-primary" >Update Styles</a></p></div>';
+
 	echo toolbox_content($ret, 'branding');
 
-	$branding = get_option('toolbox-branding');
+	// $branding = get_option('toolbox-branding');
 
-	echo '<pre>';
-	print_r($branding);
-	echo '</pre>';
+	// echo '<pre>';
+	// print_r($branding);
+	// echo '</pre>';
 }
 
 function toolbox_forms_callback() {
