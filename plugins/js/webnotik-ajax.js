@@ -109,34 +109,42 @@ jQuery(document).ready(function( $ ) {
         gTitle = $(this).closest(".keyword").find(".k-main input").val();
         $target = $(this).closest('.keyword').attr('id');
 
+
+
         var data = {
             action: 'clone_city_page',
             given_url: gUrl,
             given_title: gTitle
         };
-        $.getJSON( get_city_pages_data.ajaxurl, data, function( json ) {
-            $(".message").html("").attr("class", '').addClass("message");
-            if ( json.success ) {
-                json_data = json["data"];
-                console.log(json_data);
-                rei_message_show("Successfully clone city page. See new city details below", "success");
 
-                //let's create a new city page field
-                $(".add-sub-keyword").trigger( "click" ); 
-                //lets display the data
-                get_extra_id = $(".main-sub-keyword").data("new");
-                $("#extra-" + get_extra_id + " .k-main input").val(json.data["post_title"])
-                $("#extra-" + get_extra_id + " .k-value input").val(json.data["post_name"])
-            } else {
-                
-                var json_data = json.data;
-                $.each(json_data, function(i, item) {
-                    $(".message").addClass("error").append("Error: " + item + "<br>");
-                }); 
-            }
-        } );
+        if($target == "") {
+            rei_message_show("The target url of this city should not be empty", "error");
+        } else {
+            $.getJSON( get_city_pages_data.ajaxurl, data, function( json ) {
+                $(".message").html("").attr("class", '').addClass("message");
+                if ( json.success ) {
+                    json_data = json["data"];
+                    console.log(json_data);
+                    rei_message_show("Successfully clone city page. See new city details below", "success");
 
-        console.log(gUrl);
+                    //let's create a new city page field
+                    $(".add-sub-keyword").trigger( "click" ); 
+                    //lets display the data
+                    get_extra_id = $(".main-sub-keyword").data("new");
+                    $("#extra-" + get_extra_id + " .k-main input").val(json.data["post_title"])
+                    $("#extra-" + get_extra_id + " .k-value input").val(json.data["post_name"])
+                } else {
+                    
+                    var json_data = json.data;
+                    $.each(json_data, function(i, item) {
+                        rei_message_show("See console log", "error");
+                    }); 
+                }
+            } );
+
+            console.log(gUrl);
+        }
+        
     });
 
 	$(".rename-cp").on("click", function(e) {
