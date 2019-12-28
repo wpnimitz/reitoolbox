@@ -9,10 +9,12 @@ function webnotik_form_shortcode( $atts ){
 	$type = $atts["type"];
 	$source = $atts["source"];
 
-	$allowed_types = array('seller', 'buyer', 'lender', 'contractor', 'realtors', 'wholesale' , 'contact', 'extra');
+	$allowed_types = array('seller_form', 'buyer_form', 'private_lending_form', 'contractor_form', 'realtors_form', 'wholesale_form' , 'contact_form', 'extra_form');
 
 	if(in_array($type, $allowed_types)) {
-		$form = get_option( 'webnotik_' . $type . '_form');
+		$forms = get_option('forms');
+		$form = $forms[$type];
+
 		$business_name = get_option( 'webnotik_business_name');
 		$trust_badge = get_stylesheet_directory_uri() . '/assets/img/trust-badge.jpg';
 		$allow_trust_badge = get_option( 'allow_trust_badge');
