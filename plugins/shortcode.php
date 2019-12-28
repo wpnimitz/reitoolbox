@@ -46,25 +46,25 @@ function webnotik_form_shortcode( $atts ){
 }
 add_shortcode( 'webnotik_form', 'webnotik_form_shortcode' );
 
-function webnotik_main_topics($atts) {
-	$atts = shortcode_atts(
-		array(
-			'display' => '4',
-		), $atts, 'webnotik_main_topics' );
-	$display = $atts["display"];
+// function webnotik_main_topics($atts) {
+// 	$atts = shortcode_atts(
+// 		array(
+// 			'display' => '4',
+// 		), $atts, 'webnotik_main_topics' );
+// 	$display = $atts["display"];
 
-	$main_topics = get_option( 'webnotik_main_topics');
-	$topics = explode(",", $main_topics);
+// 	$main_topics = get_option( 'webnotik_main_topics');
+// 	$topics = explode(",", $main_topics);
 
-	$ret = '<ul class="main-topics display-'.$display.'" >';
-	foreach ($topics as $topic) {
-		$ret .= '<li>' .$topic. '</li>';
-	}
-	$ret .= '</ul>';
+// 	$ret = '<ul class="main-topics display-'.$display.'" >';
+// 	foreach ($topics as $topic) {
+// 		$ret .= '<li>' .$topic. '</li>';
+// 	}
+// 	$ret .= '</ul>';
 
-	return $ret;
-}
-add_shortcode( 'main_topics', 'webnotik_main_topics' );
+// 	return $ret;
+// }
+// add_shortcode( 'main_topics', 'webnotik_main_topics' );
 
 function webnotik_comparison($atts) {
 	global $comparison;
@@ -116,6 +116,7 @@ function webnotik_business_shortcode( $atts ){
 	
 }
 add_shortcode( 'webnotik', 'webnotik_business_shortcode' );
+
 
 function webnotik_city_pages( $atts ){
 	$atts = shortcode_atts(
@@ -169,7 +170,6 @@ function webnotik_city_pages( $atts ){
 	}
 	
 	return $ret;
-
 }
 add_shortcode( 'city_pages', 'webnotik_city_pages' );
 
@@ -185,12 +185,13 @@ function webnotik_city_keywords( $atts ){
 	$type = $atts["type"];
 	$item = $atts["item"];
 
-	if( is_front_page() ){
-		$item = "main";
+	if(is_front_page()) {
+		$city_pages_data = get_option('city_pages');
+		$target = $city_pages_data["names"][1];
+		return '<span class="city city-'.$target.'">' . $target . '</span>';
 	}
 
-		
-
+	
 	$exclude_words = array( ' for ', ' my ', 'in ', 'In ', 'We ', 'Buy', 'Houses', 'House', 'Cash', 'Fast', 'Sell');
 	$post_title = get_the_title($post->ID);
 
@@ -198,17 +199,12 @@ function webnotik_city_keywords( $atts ){
 		$post_title = str_replace($ex_word, '', $post_title);
 	}
 	
-
 	if(!empty($post_title)) {
 		$ret = $post_title;
 	} else {
 		$ret = 'City Name';
 	}
-	
-	
+		
 	return '<span class="city city-'.$post_title.'">' . $ret . '</span>';
-
 }
 add_shortcode( 'city_keywords', 'webnotik_city_keywords' );
-
-
