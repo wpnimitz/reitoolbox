@@ -5,11 +5,6 @@ extract($branding);
 
 $css = '/**';
 $css .= 'Created on: ' . date("Y/m/d H:i:s");
-
-foreach ($branding as $key => $value) {
-	$css .= $key . ': ' . $value .' \n';
-}
-
 $css .= '**/';
 
 
