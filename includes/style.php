@@ -6,7 +6,7 @@ $css .= '**/';
 $css .= '';
 $css .= '';
 
-$branding = get_option('toolbox-branding');
+$branding = get_option('branding');
 extract($branding);
 
 if(empty($hero_background_image)) {
