@@ -219,3 +219,5 @@ function webnotik_city_keywords( $atts ){
 
 }
 add_shortcode( 'city_keywords', 'webnotik_city_keywords' );
+
+

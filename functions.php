@@ -26,6 +26,7 @@ function webnotik_body_class( $classes ) {
     return $classes;
 }
 
+//create a new stylesheet each time the child theme is updated
 add_action('after_setup_theme', 'create_rei_style');
 function create_rei_style() {
 	$filename = get_stylesheet_directory() . '/assets/css/rei-style.css';
@@ -36,4 +37,16 @@ function create_rei_style() {
 		fwrite($myCSS, $css);
 		fclose($myCSS);
 	}
+}
+
+//an option for the admin to create a new push updated for the style of the child theme.
+add_action( 'wp_ajax_generate_new_rei_style', 'generate_new_rei_style' );
+function generate_new_rei_style() {
+	include_once( get_stylesheet_directory() . '/includes/style.php');
+	$file = get_stylesheet_directory() . '/assets/css/rei-style.css';
+	$myCSS = fopen($file, "w") or die("Unable to open file!");	
+	$success = "Style successfully updated.";
+	fwrite($myCSS, $css);
+	fclose($myCSS);
+	wp_send_json_success($success);
 }
