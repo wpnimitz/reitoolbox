@@ -445,8 +445,8 @@ function toolbox_city_pages_callback() {
 	$ret .= city_pages_field('Main State');
 	city_pages_field('City #1', true, 1, 'main-sub-keyword');
 	$ret .=  '<div class="extra-keywords" id="sortable">';
-	$city_count = 2;
-	for ($i=2; $i < count($city_pages["names"]); $i++) { 
+	$city_count = 1;
+	for ($i=1; $i < count($city_pages["names"]); $i++) { 
 		$ret .= city_pages_field('City #' . $city_count, true, $city_count);
 		$city_count++;
 	}
