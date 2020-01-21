@@ -1,5 +1,5 @@
 <?php
-$pages = array('Branding', 'Forms', 'City Pages', 'Divi Global', 'Help & Guidelines', 'Report');
+$tabs = array('Branding', 'Forms', 'City Pages', 'Divi Global', 'Help & Guidelines', 'Report');
 include_once('toolbox-config.php');
 
 
@@ -19,22 +19,22 @@ function toolbox_admin_scripts_assets() {
 
 add_action('admin_menu', 'toolbox_admin_menu_999');
 function toolbox_admin_menu_999() {
-	global $pages;
+	global $tabs;
     add_menu_page( __('Toolbox Pro', 'toolbox-pro'), __('Toolbox PRO', 'toolbox-pro'), 'manage_options', 'toolbox-general', 'show_toolbox_content_callback', 'dashicons-flag', 3);
     add_action( 'admin_init', 'toolbox_settings' );
 
-    for ($i=0; $i < count($pages); $i++) {
-    	$toolbox_content = 'toolbox_' .toolbox_create_slug($pages[$i], true) .'_callback';
-		add_submenu_page('toolbox-general', $pages[$i], $pages[$i], 'manage_options', 'toolbox-'.toolbox_create_slug($pages[$i]), $toolbox_content, $i);
+    for ($i=0; $i < count($tabs); $i++) {
+    	$toolbox_content = 'toolbox_' .toolbox_create_slug($tabs[$i], true) .'_callback';
+		add_submenu_page('toolbox-general', $tabs[$i], $tabs[$i], 'manage_options', 'toolbox-'.toolbox_create_slug($tabs[$i]), $toolbox_content, $i);
     }
 }
 function toolbox_settings() {
-	global $pages;
+	global $tabs;
 	//for general settings since its not part of the loop
 	register_setting( 'toolbox-general-group', 'general' );
-	for ($i=0; $i < count($pages); $i++) {
-    	$settings_group = 'toolbox-' .toolbox_create_slug($pages[$i], true) . '-group';
-		register_setting( $settings_group, toolbox_create_slug($pages[$i], true) );
+	for ($i=0; $i < count($tabs); $i++) {
+    	$settings_group = 'toolbox-' .toolbox_create_slug($tabs[$i], true) . '-group';
+		register_setting( $settings_group, toolbox_create_slug($tabs[$i], true) );
     }
 }
 
@@ -42,7 +42,7 @@ function toolbox_settings() {
 add_action( 'wp_before_admin_bar_render', 'toolbox_admin_bar_render' );
 function toolbox_admin_bar_render() {
     global $wp_admin_bar;
-    global $pages;
+    global $tabs;
     // we can remove a menu item, like the Comments link, just by knowing the right $id
     // $wp_admin_bar->remove_menu('comments');
 
@@ -63,13 +63,13 @@ function toolbox_admin_bar_render() {
 	    )
 	);
 
-	for ($i=0; $i < count($pages); $i++) {
-		$link =  'toolbox-' . toolbox_create_slug($pages[$i]);
+	for ($i=0; $i < count($tabs); $i++) {
+		$link =  'toolbox-' . toolbox_create_slug($tabs[$i]);
 		$wp_admin_bar->add_menu(
 			array(
 		    	'parent' => 'toolbox-general',
 		        'id' => $link . '-submenu',
-		        'title' => __($pages[$i]),
+		        'title' => __($tabs[$i]),
 		        'href' => admin_url( 'admin.php?page=' . $link )
 		    )
 		);
@@ -329,7 +329,7 @@ function toolbox_fields($type = 'text', $name, $group = false, $help = false, $o
 
 
 function toolbox_content($body, $tab = 'general') {
-	global $pages;
+	global $tabs;
 	$tab_group_name = 'toolbox-' .toolbox_create_slug($tab, true) . '-group';
 	?>
 	<div class="webnotik-re-wrapper">
@@ -344,9 +344,9 @@ function toolbox_content($body, $tab = 'general') {
 				<div class="panel-nav">
 					<a class="forms-group <?php echo ($tab == 'general' ? 'active' : '') ?>" href="admin.php?page=toolbox-general">General</a>
 					<?php 
-					for ($i=0; $i < count($pages); $i++) {
-				    	$toolbox_content = 'toolbox_' .toolbox_create_slug($pages[$i], true) .'_callback';
-						echo '<a class="forms-group ' . ($tab == toolbox_create_slug($pages[$i]) ? 'active' : 'inactive') . '" href="admin.php?page=toolbox-'.toolbox_create_slug($pages[$i]).'">'.$pages[$i].'</a>';
+					for ($i=0; $i < count($tabs); $i++) {
+				    	$toolbox_content = 'toolbox_' .toolbox_create_slug($tabs[$i], true) .'_callback';
+						echo '<a class="forms-group ' . ($tab == toolbox_create_slug($tabs[$i]) ? 'active' : 'inactive') . '" href="admin.php?page=toolbox-'.toolbox_create_slug($tabs[$i]).'">'.$tabs[$i].'</a>';
 				    }
 					?>
 					<a href="#" class="icon">&#9776;</a>			
