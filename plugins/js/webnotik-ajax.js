@@ -65,7 +65,8 @@ jQuery(document).ready(function( $ ) {
           }
         $( '.wda_color_picker' ).wpColorPicker(params);
     }
-	$("#get-cp").on("click", function() {
+	$("#get-cp").on("click", function(e) {
+        e.preventDefault();
 		console.log("get_city_pages");
 		var data = {
             action: 'get_city_pages',
@@ -146,6 +147,13 @@ jQuery(document).ready(function( $ ) {
         }
         
     });
+
+    $(".verify-cp").on("click", function(e) {
+        e.preventDefault();
+
+        var url = $(this)..closest('.input-group').find('input').attr('href'); 
+        window.open(url, '_blank');
+    })
 
 	$(".rename-cp").on("click", function(e) {
 		e.preventDefault();
