@@ -257,7 +257,7 @@ function city_pages_field($name, $action = false, $count = 0, $class = "") {
 	    		<p class="hint">Enter focus city or state here.</p>
 	    	</div><div class="col-2 k-value">
 	    		<div class="input-group">
-	    			<input type="url" name="city_pages[urls][]" id="'.$name.'" value="'.$value2.'">
+	    			<input type="url" name="city_pages[urls][]" id="'.$name.'_url" value="'.$value2.'">
 	    			'.$url_action.'
 	    		</div>
     			<p class="hint">Enter page URL. Very usefull for automatic linking.</p>

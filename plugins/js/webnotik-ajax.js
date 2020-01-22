@@ -151,8 +151,9 @@ jQuery(document).ready(function( $ ) {
     $(".verify-cp").on("click", function(e) {
         e.preventDefault();
 
-        var url = $(this)..closest('.input-group').find('input').attr('href'); 
-        window.open(url, '_blank');
+        var url = $(this).closest('.input-group').find('input').attr('value');
+        console.log(url); 
+        window.open( 'http://www.google.com/search?q="' + url + '"', '_blank');
     })
 
 	$(".rename-cp").on("click", function(e) {
@@ -179,7 +180,7 @@ jQuery(document).ready(function( $ ) {
             	
             	var json_data = json.data;
             	$.each(json_data, function(i, item) {
-            		$(".message").addClass("error").append("Error: " + item + "<br>");
+                    rei_message_show("Error: " + item, "error");
             	}); 
             }
         } );
