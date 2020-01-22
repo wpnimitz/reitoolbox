@@ -180,7 +180,7 @@ jQuery(document).ready(function( $ ) {
             	
             	var json_data = json.data;
             	$.each(json_data, function(i, item) {
-                    rei_message_show("Error: " + item, "error");
+                    rei_message_show("Looks like the URL is not valid. Please check if the url is correct. Additional info: " + item, "error");
             	}); 
             }
         } );
