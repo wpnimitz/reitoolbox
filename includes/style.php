@@ -50,7 +50,6 @@ if(!empty($main_branding_color)) {
 
 if(!empty($form_header_background)) {
 	$css .= '
-	.webnotik-pages .form-header-hero,
 	.webnotik-pages .form-hero .form-header,
 	.single .form-header-hero .form-header,
 	.single .form-hero .form-header{
