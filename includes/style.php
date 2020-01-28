@@ -50,12 +50,18 @@ if(!empty($main_branding_color)) {
 
 if(!empty($form_header_background)) {
 	$css .= '
-	.webnotik-pages .form-hero .form-header,
+	.webnotik-pages .form-header,
 	.single .form-header-hero .form-header,
 	.single .form-hero .form-header{
 	    background: '.$form_header_background.';
 	    
 	}';
+
+	$css .= '
+		.form-header-hero, .form {
+		    background: transparent !important;
+		}
+	';
 }
 
 if(!empty($special_page_background_color)) {
