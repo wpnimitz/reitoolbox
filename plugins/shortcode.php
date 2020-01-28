@@ -213,6 +213,11 @@ function webnotik_city_keywords( $atts ){
 		$city_pages_data = get_option('city_pages');
 		$target = $city_pages_data["names"][0];
 		return '<span class="city city-'.$target.'">' . $target . '</span>';
+	} else {
+		$city_keyword = get_post_meta($post->ID, 'city_keyword', true);
+		if(!empty($city_keyword)) {
+			return '<span class="city city-meta">' . $city_keyword . '</span>';
+		}
 	}
 
 	
