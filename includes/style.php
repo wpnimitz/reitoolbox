@@ -35,11 +35,6 @@ if(!empty($main_branding_color)) {
 	    color: #fff!important;
 	}
 	';
-	$css .= '
-	.webnotik-pages .et_pb_divider:before {
-	    border-top-color: '.$main_branding_color.';
-	}
-	';
 
 	$css .= '
 	.et_pb_portfolio_grid.badge .et_pb_portfolio_item .post-meta a[title] {
@@ -183,7 +178,7 @@ $css .= '
 .round_corners .et_pb_module .gform_wrapper button,
 .round_corners .et_pb_image .has-box-shadow-overlay,
 .round_corners .et_pb_module.rounded{
-    border-radius: '.$round_corners_px.'px !important;
+    border-radius: '.$round_corners_px.'px;
 }
 ';
 
@@ -194,4 +189,11 @@ $css .= '
 	margin-left: -1px;
 	border: '.$round_corners_px.'px;
 }
+';
+
+
+$ccs .= '
+	.single .et_pb_post {
+	    margin-bottom: 0 !important;
+	}
 ';
