@@ -6,7 +6,7 @@ if(!empty($general["business_logo_url"])) {
 	$logo = $general["business_logo_url"];
 	$business_name = $general["business_name"];
 } else {
-	$logo = get_stylesheet_directory_uri() . '/assets/img/rei-toolbox.jpg');
+	$logo = get_stylesheet_directory_uri() . '/assets/img/rei-toolbox.jpg';
 	$business_name = 'Logo';
 }
 
