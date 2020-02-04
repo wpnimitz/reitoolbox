@@ -1,5 +1,18 @@
 <?php
-$logo = get_option('webnotik_business_logo_url', get_stylesheet_directory_uri() . '/assets/img/rei-toolbox.jpg');
+//let's get the logo
+$general = get_option('general');
+
+if(!empty($general["business_logo_url"])) {
+	$logo = $general["business_logo_url"];
+	$business_name = $general["business_name"];
+} else {
+	$logo = get_stylesheet_directory_uri() . '/assets/img/rei-toolbox.jpg');
+	$business_name = 'Logo';
+}
+
+
+
+
 $business_name = get_option('webnotik_business_name', 'REI ToolBox');
 $comparison = '<table class="table table-bordered table-striped">
 	<thead>
