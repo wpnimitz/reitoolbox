@@ -192,7 +192,7 @@ $css .= '
 ';
 
 
-$ccs .= '
+$css .= '
 	.single .et_pb_post {
 	    margin-bottom: 0 !important;
 	}
