@@ -217,6 +217,10 @@ function webnotik_city_keywords( $atts ){
 		$city_keyword = get_post_meta($post->ID, 'city_keyword', true);
 		if(!empty($city_keyword)) {
 			return '<span class="city city-meta">' . $city_keyword . '</span>';
+		} else {
+			if(!is_page()) {
+				return '<span class="city not-page">City Keyword</span>';
+			}
 		}
 	}
 
