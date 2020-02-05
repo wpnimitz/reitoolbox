@@ -50,3 +50,9 @@ function generate_new_rei_style() {
 	fclose($myCSS);
 	wp_send_json_success($success);
 }
+
+
+add_filter( 'gform_submit_button', 'form_submit_button', 10, 2 );
+function form_submit_button( $button, $form ) {
+    return "<button type='submit' class='button gform_button' id='gform_submit_button_{$form['id']}'><span>Submit</span></button>";
+}
