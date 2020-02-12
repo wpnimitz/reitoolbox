@@ -367,7 +367,7 @@ function toolbox_content($body, $tab = 'general') {
 
 function show_toolbox_content_callback() {
 
-	$ret = '<p>Welcome to general settings of Wide Open Homes LLC. Output any shortcode in any of your wordpress page and we will instantly convert any data to seo rich snippets.</p>';	
+	$ret = '<p>Welcome to general settings. Output any shortcode in any of your wordpress page and we will instantly convert any data to seo rich snippets.</p>';	
 	
 	$ret .= toolbox_fields('text', 'Business Name', 'general', array('help' => '[webnotik business="name"]'));
 	$ret .= toolbox_fields('text', 'Business Phone Number', 'general', array('help' => '[webnotik business="phone_number"]'));
@@ -404,6 +404,12 @@ function toolbox_branding_callback() {
 	$ret .= toolbox_fields('text', 'Form Button Background Hover', 'branding', false, false, 'wda_color_picker');
 	$ret .= toolbox_fields('select', 'Allow Trust Badge?', 'branding', false, array("No","Yes"));
 
+
+	//#TODO
+	/**
+		Need to remove this one since special pages have their own settings and mostly matters with the design on the homepage
+		Also, their is a new function of Divi (Theme Builder) that defeats the purpose of this functionality.
+	**/
 	$ret .= '<h3>Special Pages</h3>';
 	$ret .= '<p>Perfect for Thank You and 404 Pages. Make sure to add <strong>special-page</strong> class to the section class settings.</p>';
 	$ret .= toolbox_fields('text', 'Special Page Background Color', 'branding', false, false, 'wda_color_picker');
@@ -470,8 +476,6 @@ function toolbox_city_pages_callback() {
 function toolbox_divi_global_callback() {
 
 	$ret = '<p>Here\'s the most important part. Very useful for header and footer sections.</p>';
-
-	$ret .= toolbox_fields('text', 'Blog Post - Before Content', 'divi_global', array('help' => 'ADD any divi global layouts ID to the field above. IDs must be separated with commas.'));
 	$ret .= toolbox_fields('text', 'Blog Post - After Content', 'divi_global', array('help' => 'ADD any divi global layouts ID to the field above. IDs must be separated with commas.'));
 
 	$ret .= get_submit_button();

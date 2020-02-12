@@ -54,5 +54,5 @@ function generate_new_rei_style() {
 
 add_filter( 'gform_submit_button', 'form_submit_button', 10, 2 );
 function form_submit_button( $button, $form ) {
-    return "<button type='submit' class='button gform_button' id='gform_submit_button_{$form['id']}'><span>Submit</span></button>";
+    return "<button type='submit' class='button gform_button' id='gform_submit_button_{$form['id']}'><span>{$form['button']['text']}</span></button>";
 }

@@ -177,7 +177,8 @@ $css .= '
 .round_corners .et_pb_button,
 .round_corners .et_pb_module .gform_wrapper button,
 .round_corners .et_pb_image .has-box-shadow-overlay,
-.round_corners .et_pb_module.rounded{
+.round_corners .et_pb_module.rounded,
+.et_pb_module .gform_wrapper button {
     border-radius: '.$round_corners_px.'px;
 }
 ';

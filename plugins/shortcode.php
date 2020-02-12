@@ -95,7 +95,6 @@ function webnotik_business_shortcode( $atts ){
 
 	if(in_array($business, $allowed_types)) {
 		$business_data = get_option( 'general' );
-
 		if(!empty($business_data['business_' . $business])) {
 			$ret = $business_data['business_' . $business];
 		} elseif(!empty($business_data[$business])) {
@@ -111,7 +110,6 @@ function webnotik_business_shortcode( $atts ){
 	if($type != 'html') {
 		return $ret;
 	} else {
-
 		return '<span class="info-'.$business.'">'.$ret.'</span>';
 	}
 		
