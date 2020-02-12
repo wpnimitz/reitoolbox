@@ -327,6 +327,16 @@ function toolbox_fields($type = 'text', $name, $group = false, $help = false, $o
 	return $ret;
 }
 
+add_action( 'et_after_main_content', 'webnotik_global_footer' );
+function webnotik_global_footer() {
+	if(is_single()) {
+		$divi_global = get_option('divi_global');
+
+		echo do_shortcode('<div class="upsell-wrapper">[et_pb_section global_module="'.$divi_global["blog_post_after_content"].'"][/et_pb_section]</div>');
+	}
+    
+}
+
 
 function toolbox_content($body, $tab = 'general') {
 	global $tabs;
