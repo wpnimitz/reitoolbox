@@ -332,7 +332,7 @@ function webnotik_global_footer() {
 	if(is_single()) {
 		$divi_global = get_option('divi_global');
 
-		echo do_shortcode('<div class="upsell-wrapper">[et_pb_section global_module="'.$divi_global["blog_post_after_content"].'"][/et_pb_section]</div>');
+		echo do_shortcode('<div class="divi-global">[et_pb_section global_module="'.$divi_global["blog_post_after_content"].'"][/et_pb_section]</div>');
 	}
     
 }
