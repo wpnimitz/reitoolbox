@@ -80,41 +80,42 @@ function webnotik_business_shortcode( $atts ){
 		array(
 			'business' => 'seller',
 			'text' => 'LINK',
-			'type' => 'html',
 		), $atts, 'webnotik' );
 	$business = $atts["business"];
-	$type = $atts["type"];
 	$text = $atts["text"];
 	$ret = '';
 
-	if($business == "weburl") {
-		return get_site_url();
-	}
-
 	$allowed_types = array("weburl","name", "phone_number", "email_address", "address", "address_line_1", "address_line_2", "logo_url");
 
-	if(in_array($business, $allowed_types)) {
-		$business_data = get_option( 'general' );
-		if(!empty($business_data['business_' . $business])) {
-			$ret = $business_data['business_' . $business];
-		} elseif(!empty($business_data[$business])) {
-			$ret = $business_data[$business];
-		} else {
-			if($business == 'address') {
-				$ret = $business_data["business_address_line_1"] . ', ' . $business_data["business_address_line_2"];
+
+	if(! $data = wp_cache_get('wda_' . $business, 'wda_' . $business . '_data')) {
+		if($business == "weburl") {
+			$data = get_site_url();
+			wp_cache_add( 'wda_' . $business, $data, 'wda_' . $business . '_data' );
+		}
+
+		if(in_array($business, $allowed_types)) {
+			$business_data = get_option( 'general' );
+			if(!empty($business_data['business_' . $business])) {
+				$ret = $business_data['business_' . $business];
+			} elseif(!empty($business_data[$business])) {
+				$ret = $business_data[$business];
 			} else {
-				$ret = '--';
+				if($business == 'address') {
+					$ret = $business_data["business_address_line_1"] . ', ' . $business_data["business_address_line_2"];
+				} else {
+					$ret = '--';
+				}
 			}
 		}
-	}
-	if($type != 'html') {
-		return $ret;
-	} else {
-		return '<span class="info-'.$business.'">'.$ret.'</span>';
-	}
+		wp_cache_add( 'wda_' . $business, $data, 'wda_' . $business . '_data' );
+		$data =  '<span class="info-'.$business.'">'.$ret.'</span>';
 		
+	}
+	return $data;		
 }
 add_shortcode( 'webnotik', 'webnotik_business_shortcode' );
+
 
 function webnotik_legal_pages( $atts ){  
 	$atts = shortcode_atts(
