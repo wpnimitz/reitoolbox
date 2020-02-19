@@ -389,6 +389,13 @@ function show_toolbox_content_callback() {
 	$ret .= toolbox_fields('text', 'Terms of Use URL', 'general', array('help' => '[legal_pages for="terms"]'));
 
 	$ret .= get_submit_button();
+
+	$ret .= '<div>
+			<p>Other shortcode available</p>
+			<p>[webnotik business="address"] -> combine address line 1 and 2 in once complete address. Perfect for the footer.</p>
+			<p>[webnotik business="weburl"] -> display complete url of the website. Perfect for legal pages.</p>
+	
+	</div>';
 	echo toolbox_content($ret, 'general');
 }
 
