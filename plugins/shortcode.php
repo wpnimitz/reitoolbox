@@ -87,8 +87,7 @@ function webnotik_business_shortcode( $atts ){
 
 	$allowed_types = array("weburl","name", "phone_number", "email_address", "address", "address_line_1", "address_line_2", "logo_url");
 
-
-	if(! $data = wp_cache_get('wda_' . $business, 'wda_' . $business . '_data')) {
+	if(!$data = wp_cache_get('wda_' . $business, 'wda_' . $business . '_data')) {
 		if($business == "weburl") {
 			$data = get_site_url();
 			wp_cache_add( 'wda_' . $business, $data, 'wda_' . $business . '_data' );
@@ -108,9 +107,8 @@ function webnotik_business_shortcode( $atts ){
 				}
 			}
 		}
-		wp_cache_add( 'wda_' . $business, $data, 'wda_' . $business . '_data' );
 		$data =  '<span class="info-'.$business.'">'.$ret.'</span>';
-		
+		wp_cache_add( 'wda_' . $business, $data, 'wda_' . $business . '_data' );
 	}
 	return $data;		
 }
