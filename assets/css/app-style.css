@@ -402,8 +402,8 @@ START: FORM STYLING;
     .et_pb_module *[type=submit] {
         font-size: 16px !important;
     }
-    .location-list .column-2 ul {
-        padding: 0;
+    .location-list ul {
+        padding: 20px !important;
     }
     .location-list .column-2 li {
         width: 100%;
