@@ -402,6 +402,12 @@ START: FORM STYLING;
     .et_pb_module *[type=submit] {
         font-size: 16px !important;
     }
+    .location-list .column-2 ul {
+        padding: 0;
+    }
+    .location-list .column-2 li {
+        width: 100%;
+    }
 }
 
 @media screen and (min-width: 768px) {
