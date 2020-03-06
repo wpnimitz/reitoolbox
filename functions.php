@@ -58,7 +58,7 @@ function form_submit_button( $button, $form ) {
 	$id = 'gform_submit_button_' . $form['id'];
 	$text = $form["button"]["text"];
 
-	if($branding[""]) {
+	if(!empty($branding["form_button_background"])) {
 		return '<button type="submit" class="button gform_button" id="'.$id.'"><span>'.$text.'</span></button>';
 	} else {
 	    return '<div class="et_pb_button_module_wrapper et_pb_button_0_wrapper et_pb_button_alignment_center et_pb_module">
