@@ -408,7 +408,7 @@ function toolbox_branding_callback() {
 	$ret .= toolbox_fields('text', 'Secondary Branding Color', 'branding', false, false, 'wda_color_picker');
 
 	$ret .= '<h3>Hero Section</h3>';
-	$ret .= toolbox_fields('text', 'Hero Background Image', 'branding');
+	$ret .= toolbox_fields('text', 'Hero Background Image', 'branding', array('help' => 'add hero-background class to the hero section to use the this function.'));
 	$ret .= toolbox_fields('text', 'Hero Background Overlay Color', 'branding', false, false, 'wda_color_picker');
 
 	$ret .= '<h3>Form Design</h3>';
