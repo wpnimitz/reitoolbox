@@ -421,7 +421,7 @@ function toolbox_branding_callback() {
 	$ret .= toolbox_fields('text', 'Form Button Background', 'branding', false, false, 'wda_color_picker');
 	$ret .= toolbox_fields('text', 'Form Button Background Hover', 'branding', false, false, 'wda_color_picker');
 	$ret .= toolbox_fields('select', 'Allow Trust Badge?', 'branding', false, array("No","Yes"));
-
+ 
 
 	//#TODO
 	/**
