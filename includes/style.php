@@ -137,41 +137,41 @@ if($form_fields_size == "Small") {
 }
 
 
-if(!empty($form_button_background)) {
-	$css .= '
-	.et_pb_module *[type=submit], 
-	.et_pb_module .gform_wrapper button,
-	.webnotik-pages .thank-you-page.et_pb_fullwidth_header .et_pb_button,
-	.widget_search input#searchsubmit {
-		background: '.$form_button_background.';
-		margin: 0 auto;
-		text-align: center;
-		font-weight: bold;
-		color: #fff !important;
-		background-image: linear-gradient(to left, transparent, transparent 50%, '.$form_button_background_hover.' 50%, '.$form_button_background_hover.');
-		background-position: 100% 0;
-		background-size: 200% 100%;
-		transition: all .25s ease-in;
-		margin-bottom: 0;
-	}
-	';
+// if(!empty($form_button_background)) {
+// 	$css .= '
+// 	.et_pb_module *[type=submit], 
+// 	.et_pb_module .gform_wrapper button,
+// 	.webnotik-pages .thank-you-page.et_pb_fullwidth_header .et_pb_button,
+// 	.widget_search input#searchsubmit {
+// 		background: '.$form_button_background.';
+// 		margin: 0 auto;
+// 		text-align: center;
+// 		font-weight: bold;
+// 		color: #fff !important;
+// 		background-image: linear-gradient(to left, transparent, transparent 50%, '.$form_button_background_hover.' 50%, '.$form_button_background_hover.');
+// 		background-position: 100% 0;
+// 		background-size: 200% 100%;
+// 		transition: all .25s ease-in;
+// 		margin-bottom: 0;
+// 	}
+// 	';
 
-	$css .= '
-	.et_pb_module *[type=submit]:hover, 
-	.et_pb_module .gform_wrapper button:hover,
-	.webnotik-pages .thank-you-page.et_pb_fullwidth_header .et_pb_button:hover,
-	.widget_search input#searchsubmit:hover {
-	  background-position: 0 0;
-	  color: #fff !important;
-	}
-	';
+// 	$css .= '
+// 	.et_pb_module *[type=submit]:hover, 
+// 	.et_pb_module .gform_wrapper button:hover,
+// 	.webnotik-pages .thank-you-page.et_pb_fullwidth_header .et_pb_button:hover,
+// 	.widget_search input#searchsubmit:hover {
+// 	  background-position: 0 0;
+// 	  color: #fff !important;
+// 	}
+// 	';
 
-	$css .= '
-	.webnotik-pages .location-list li a {
-		color: '.$form_button_background.'
-	}
-	';
-}
+// 	$css .= '
+// 	.webnotik-pages .location-list li a {
+// 		color: '.$form_button_background.'
+// 	}
+// 	';
+// }
 
 
 if($round_corners != "Yes") {
