@@ -434,10 +434,9 @@ function toolbox_branding_callback() {
 	// $ret .= toolbox_fields('text', 'Special Page Button Background Color', 'branding', false, false, 'wda_color_picker');
 	// $ret .= toolbox_fields('text', 'Special Page Button Hover Background Color', 'branding', false, false, 'wda_color_picker');
 
-	$ret .= '<div class="options">';
 	$ret .= '<p>Don\'t forget to click update styles button to create a new version of the css.</p><br>';
+	$ret .= '<div class="options">';	
 	$ret .= get_submit_button();
-
 	$ret .= '<p class="submit"><a href="#" id="save-styles" class="button button-primary button-large" >Update Styles</a></p></div>';
 
 	echo toolbox_content($ret, 'branding');
