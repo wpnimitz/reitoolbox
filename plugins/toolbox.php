@@ -408,7 +408,7 @@ function toolbox_branding_callback() {
 	$ret .= toolbox_fields('text', 'Secondary Branding Color', 'branding', false, false, 'wda_color_picker');
 
 	$ret .= '<h3>Hero Section</h3>';
-	$ret .= toolbox_fields('text', 'Hero Background Image', 'branding', array('help' => 'add hero-background class to the hero section to use the this function.'));
+	$ret .= toolbox_fields('text', 'Hero Background Image', 'branding', array('hint' => 'add hero-background class to the hero section to use the this function.'));
 	$ret .= toolbox_fields('text', 'Hero Background Overlay Color', 'branding', false, false, 'wda_color_picker');
 
 	$ret .= '<h3>Form Design</h3>';
@@ -436,7 +436,7 @@ function toolbox_branding_callback() {
 	$ret .= '<div class="options">';
 	$ret .= get_submit_button();
 
-	$ret .= '<p class="submit"><a href="#" id="save-styles" class="button button-primary" >Update Styles</a></p></div>';
+	$ret .= '<p class="submit"><a href="#" id="save-styles" class="button button-primary button-large" >Update Styles</a></p></div>';
 
 	echo toolbox_content($ret, 'branding');
 
