@@ -43,7 +43,7 @@ if(!empty($menu_cta_color)) {
 	    border-radius: 3px;
 	    color: #fff !important;
 	}
-	#main-header.et-fixed-header #et-top-navigation li a {
+	.et-fixed-header .cta a {
 		color: #fff !important;
 	}
 	';
