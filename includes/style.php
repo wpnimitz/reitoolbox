@@ -171,6 +171,36 @@ if(!empty($form_button_background)) {
 		color: '.$form_button_background.'
 	}
 	';
+} else {
+	$css .= '
+	.widget_search input#searchsubmit {
+		background: '.$main_branding_color.';
+		margin: 0 auto;
+		text-align: center;
+		font-weight: bold;
+		color: #fff !important;
+		background-image: linear-gradient(to left, transparent, transparent 50%, '.$main_branding_color.' 50%, '.$main_branding_color.');
+		background-position: 100% 0;
+		background-size: 200% 100%;
+		transition: all .25s ease-in;
+		margin-bottom: 0;
+	}
+	';
+
+	$css .= '
+	.widget_search input#searchsubmit:hover {
+	  background-position: 0 0;
+	  color: #fff !important;
+	}
+	';
+
+
+	$css .= '
+	.webnotik-pages .location-list li a {
+		color: '.$main_branding_color.'
+	}
+	';
+
 }
 
 
