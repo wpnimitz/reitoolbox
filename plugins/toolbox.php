@@ -271,7 +271,7 @@ function city_pages_field($name, $action = false, $count = 0, $class = "") {
 function toolbox_fields($type = 'text', $name, $group = false, $help = false, $options = false, $class = false, $others = false) {
 	$label = $name;
 	$name = toolbox_create_slug($name, true);
-	$ret = '<div class="form-group">';
+	$ret = '<div class="form-group '.$name.'">';
 	$ret .= '<div class="form-label">';
 	$ret .= '<label for="'.$name.'">'.$label.'</label>';
 	$ret .= '</div>';
