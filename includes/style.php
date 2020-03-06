@@ -27,20 +27,27 @@ if(!empty($main_branding_color)) {
 		color: '.$main_branding_color.';
 	}
 	';
-	$css .= '
-	.cta a {   
-		background: '.$main_branding_color.';
-		padding: 15px 20px!important;
-	    border-radius: 3px;
-	    color: #fff!important;
-	}
-	';
 
 	$css .= '
 	.et_pb_portfolio_grid.badge .et_pb_portfolio_item .post-meta a[title] {
 	    background: '.$main_branding_color.' !important;
 	}
 	'; 
+}
+
+if(!empty($menu_cta_color)) {
+	$css .= '
+	.cta a {   
+		background: '.$main_branding_color.';
+		padding: 15px 20px!important;
+	    border-radius: 3px;
+	    color: #fff !important;
+	}
+	#main-header.et-fixed-header #et-top-navigation li a {
+		color: #fff !important;
+	}
+	';
+
 }
 
 if(!empty($form_header_background)) {
