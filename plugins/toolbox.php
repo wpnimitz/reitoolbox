@@ -406,7 +406,7 @@ function toolbox_branding_callback() {
 	$ret .= toolbox_fields('text', 'Round Corners PX', 'branding', array('hint' => 'add <strong>rounded_corners</strong> to module or row class.'));
 	$ret .= toolbox_fields('text', 'Main Branding Color', 'branding', array('hint' => 'Use for the city keyword color in hero section'), false, 'wda_color_picker', array('alpha' => 'true'));
 	$ret .= toolbox_fields('text', 'Secondary Branding Color', 'branding', false, false, 'wda_color_picker', array('alpha' => 'true'));
-	$ret .= toolbox_fields('text', 'Menu CTA Color', 'branding', array('hint' => 'you must add <strong>cta cta-menu</strong> class to the menu'), false, 'wda_color_picker', array('alpha' => 'true'));
+	$ret .= toolbox_fields('text', 'Menu CTA Color', 'branding', array('hint' => 'you must add <strong>cta</strong> class to the menu'), false, 'wda_color_picker', array('alpha' => 'true'));
 
 	$ret .= '<h3>Hero Section</h3>';
 	$ret .= toolbox_fields('text', 'Hero Background Image', 'branding', array('hint' => 'add hero-background class to the hero section to use the this function.'));
@@ -428,13 +428,14 @@ function toolbox_branding_callback() {
 		Need to remove this one since special pages have their own settings and mostly matters with the design on the homepage
 		Also, their is a new function of Divi (Theme Builder) that defeats the purpose of this functionality.
 	**/
-	$ret .= '<h3>Special Pages</h3>';
-	$ret .= '<p>Perfect for Thank You and 404 Pages. Make sure to add <strong>special-page</strong> class to the section class settings.</p>';
-	$ret .= toolbox_fields('text', 'Special Page Background Color', 'branding', false, false, 'wda_color_picker');
-	$ret .= toolbox_fields('text', 'Special Page Button Background Color', 'branding', false, false, 'wda_color_picker');
-	$ret .= toolbox_fields('text', 'Special Page Button Hover Background Color', 'branding', false, false, 'wda_color_picker');
+	// $ret .= '<h3>Special Pages</h3>';
+	// $ret .= '<p>Perfect for Thank You and 404 Pages. Make sure to add <strong>special-page</strong> class to the section class settings.</p>';
+	// $ret .= toolbox_fields('text', 'Special Page Background Color', 'branding', false, false, 'wda_color_picker');
+	// $ret .= toolbox_fields('text', 'Special Page Button Background Color', 'branding', false, false, 'wda_color_picker');
+	// $ret .= toolbox_fields('text', 'Special Page Button Hover Background Color', 'branding', false, false, 'wda_color_picker');
 
 	$ret .= '<div class="options">';
+	$ret .= '<p>Don\'t forget to click update styles button to create a new version of the css.</p>';
 	$ret .= get_submit_button();
 
 	$ret .= '<p class="submit"><a href="#" id="save-styles" class="button button-primary button-large" >Update Styles</a></p></div>';
