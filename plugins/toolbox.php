@@ -403,10 +403,10 @@ function toolbox_branding_callback() {
 	$ret = '<p>Welcome to your branding settings. Please use this page to easily change for this template.</p>';	
 	
 	$ret .= toolbox_fields('select', 'Round Corners?', 'branding', false, array("No","Yes"));
-	$ret .= toolbox_fields('text', 'Round Corners PX', 'branding', array('help' => 'add <strong>rounded_corners</strong> to module or row class.'));
+	$ret .= toolbox_fields('text', 'Round Corners PX', 'branding', array('hint' => 'add <strong>rounded_corners</strong> to module or row class.'));
 	$ret .= toolbox_fields('text', 'Main Branding Color', 'branding', array('hint' => 'Use for the city keyword color in hero section'), false, 'wda_color_picker', array('alpha' => 'true'));
-	$ret .= toolbox_fields('text', 'Secondary Branding Color', 'branding', false, false, 'wda_color_picker');
-	$ret .= toolbox_fields('text', 'Menu CTA Color', 'branding', false, false, 'wda_color_picker');
+	$ret .= toolbox_fields('text', 'Secondary Branding Color', 'branding', false, false, 'wda_color_picker', array('alpha' => 'true'));
+	$ret .= toolbox_fields('text', 'Menu CTA Color', 'branding', array('hint' => 'you must add <strong>cta cta-menu</strong> class to the menu'), false, 'wda_color_picker', array('alpha' => 'true'));
 
 	$ret .= '<h3>Hero Section</h3>';
 	$ret .= toolbox_fields('text', 'Hero Background Image', 'branding', array('hint' => 'add hero-background class to the hero section to use the this function.'));
