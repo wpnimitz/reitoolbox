@@ -125,7 +125,7 @@ if(!empty($form_body_background)) {
 	.webnotik-pages .form-body-content, .single .form-body-content {
 	    background: '.$form_body_background.';
 	}
-	';
+	'; 
 }
 
 if($form_fields_size == "Small") {
