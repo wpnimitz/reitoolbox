@@ -75,11 +75,7 @@ function webnotik_comparison($atts) {
 add_shortcode( 'rei_comparison', 'webnotik_comparison' );
 
 function display_current_year($atts) {
-	global $comparison;
-	$ret = '<div class="webnotik-comparison">';
-	$ret .= $comparison;
-	$ret .= '</div>';
-	return $ret;
+	return date("Y");
 }
 add_shortcode( 'current_year', 'display_current_year' );
 
