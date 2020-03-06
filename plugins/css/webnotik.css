@@ -341,6 +341,25 @@ span.city {
   height: 25px !important;
 }
 
+.wp-picker-container .wp-color-result-text {
+  z-index: 2;
+  position: relative;
+}
+
+.wp-picker-container span.color-alpha {
+  z-index: 1;
+}
+
+.wp-picker-container .wp-picker-input-wrap,
+.wp-picker-container button {
+  display: inline-block;
+}
+
+.wp-picker-container input[type=text].wp-color-picker {
+    max-width: 150px !important;
+}
+
+
 
 
 
@@ -402,9 +421,6 @@ span.city {
   }
   
 }
-
-
-
 
 
 
