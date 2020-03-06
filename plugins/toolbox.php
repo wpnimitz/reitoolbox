@@ -347,7 +347,7 @@ function toolbox_content($body, $tab = 'general') {
 		<div class="panel">
 			<div class="panel-header">
 				<h1>Welcome to REI Toolbox Settings</h1>
-				<p>Speeding up the process of website development for Real Estate Investor clients.</p>
+				<p>Speeding the process of development phase for Real Estate Investors' websites.</p>
 				
 			</div>
 			<div class="panel-navigation">
@@ -404,7 +404,7 @@ function toolbox_branding_callback() {
 	
 	$ret .= toolbox_fields('select', 'Round Corners?', 'branding', false, array("No","Yes"));
 	$ret .= toolbox_fields('text', 'Round Corners PX', 'branding', array('help' => 'add <strong>rounded_corners</strong> to module or row class.'));
-	$ret .= toolbox_fields('text', 'Main Branding Color', 'branding', false, false, 'wda_color_picker');
+	$ret .= toolbox_fields('text', 'Main Branding Color', 'branding', false, false, 'wda_color_picker', array('alpha' => 'true'));
 	$ret .= toolbox_fields('text', 'Secondary Branding Color', 'branding', false, false, 'wda_color_picker');
 
 	$ret .= '<h3>Hero Section</h3>';
