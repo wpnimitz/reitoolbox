@@ -367,6 +367,8 @@ table {
   padding: 0;
   border-collapse: collapse;
   border-spacing: 0;
+  max-width: 600px;
+  border-right: 0px;
 }
 
 table tr {
@@ -384,6 +386,11 @@ table th {
   text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 1px;
+}
+
+table tr {
+    border: 1px solid #ddd;
+    padding: 5px;
 }
 
 
