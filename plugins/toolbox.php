@@ -504,15 +504,9 @@ function toolbox_divi_global_callback() {
 
 function toolbox_help_guidelines_callback() {
 	include("parsedown.php");
-	
-
-	$ret = '<h2>Welcome to the help and guidelines tab!</h2>';
-	$ret .= 'Here, you can view all available shortcode and the best way to use them throughtout divi theme.';
-
-	$ret .= '<p>In <strong>General</strong> tab, all shortcode is given. 
-	However, we have added few more shortcodes to enhanced and speed up our process.</p>';
-	$ret .= '<p><strong>[webnotik business=address]</strong> -  combines address line 1 and 2 in one complete address.</p>';
-	$ret .= '<p><strong>[webnotik business=weburl]</strong> -  display the current address of the website.</p>';
+	$contents = file_get_contents('README.md');
+	$Parsedown = new Parsedown();
+	$ret =  $Parsedown->text($contents);
 
 	echo toolbox_content($ret, 'help-guidelines');
 }
