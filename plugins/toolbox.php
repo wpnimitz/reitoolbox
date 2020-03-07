@@ -503,7 +503,11 @@ function toolbox_divi_global_callback() {
 
 
 function toolbox_help_guidelines_callback() {
-	$ret = 'Something awesome is coming here.';
+	$ret = '<h2>Welcome to the help and guidelines tab!</h2>';
+	$ret .= 'Here, you can view all available shortcode and the best way to use them throughtout divi theme.';
+
+
+
 	echo toolbox_content($ret, 'help-guidelines');
 }
 
