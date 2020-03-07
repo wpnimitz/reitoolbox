@@ -79,6 +79,20 @@ function display_current_year($atts) {
 }
 add_shortcode( 'current_year', 'display_current_year' );
 
+function display_copyright($atts) {
+	$atts = shortcode_atts(
+		array(
+			'year' => '',
+		), $atts, 'citypro_copyright' );
+	$year = $atts["year"];
+
+	if(!empty($year)) {
+		return 'Copyright &copy;' . $year . '-' . date("Y") . ' ' . get_bloginfo('name') .'. All rights reserved. Powered and maintained by <a href="https://webnotik.com">Webnotik Digital Agency</a>';
+	}
+
+}
+add_shortcode( 'citypro_copyright', 'display_copyright' );
+
 
 function webnotik_business_shortcode( $atts ){  
 	$atts = shortcode_atts(
