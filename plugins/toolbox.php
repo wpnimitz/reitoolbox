@@ -506,8 +506,15 @@ function toolbox_help_guidelines_callback() {
 	$ret = '<h2>Welcome to the help and guidelines tab!</h2>';
 	$ret .= 'Here, you can view all available shortcode and the best way to use them throughtout divi theme.';
 
+	}?>
+
+<p>In <strong>General</strong> tab, all shortcode is given. However, we have added few more shortcodes to enhance and speed up our process.</p>
+<p><strong>[webnotik business=address]</strong> -  combines address line 1 and 2 in one complete address.</p>
+<p><strong>[webnotik business=weburl]</strong> -  display the current address of the website.</p>
 
 
+	<?php 
+{
 	echo toolbox_content($ret, 'help-guidelines');
 }
 
