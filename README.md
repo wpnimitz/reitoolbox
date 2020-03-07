@@ -40,4 +40,15 @@ Check shortcode parameters.
 
 Name | Description
 ---- | ----
-type | by default, the shortcode will produce a list of cities in UL LI format. If you want to use an inline format, just add _type=inline_ to your shortcode `[city_pages type=inline]`
+type | By default, the shortcode will produce a list of cities in UL LI format. If you want to use an inline format, just add _type=inline_ to your shortcode `[city_pages type=inline]`
+after | only available if you have use inline as type. You can literally add any string after each city. `[city_pages type='inline' after='/']`
+limit | basically, limits the output of the shortcode.
+column | added in response to the location page, you can use 2 or 3. If you need to add extra column,  you have to add extra css with to met your requirements.
+
+
+###Divi Global
+Deprecated after Divi v4.0 has been released last October 17, 2019. The new divi builder replaces the **Divi Global** tab. Its main objected is to display global header and footer and now, it is deprecated since divi release its own version.
+
+
+###Reports
+_Coming Soon_
