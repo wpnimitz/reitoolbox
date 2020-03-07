@@ -21,6 +21,10 @@ Branding tab is solely focus on the form branding. If the main setting under **B
 
 All forms are using the same styling, you may need to adjust some custom style it. All forms include 3 main classes:
 
--**gform_wrapper** - very basic parent class to setup our default form style.
--**webnotik-{form-type}** - to target specific form.
--**webnotik-form** - to target all forms.
+*-**gform_wrapper** - very basic parent class to setup our default form style.
+
+*-**webnotik-{form-type}** - to target specific form.
+
+*-**webnotik-form** - to target all forms.
+
+

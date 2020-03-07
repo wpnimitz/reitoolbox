@@ -483,9 +483,10 @@ function toolbox_city_pages_callback() {
 
 	$ret .=  '<div class="options">';
     $ret .= get_submit_button();
-	$ret .=  '<p class="submit"><a href="#" id="submit" class="button button-primary add-sub-keyword">Add new city page</a></p>
-	    <p class="submit"><a href="#" id="get-cp" class="button button-primary" >List City Pages</a></p>
+	$ret .=  '<p class="submit"><a href="#" id="submit" class="button button-primary button-large add-sub-keyword">Add new city page</a></p>
+	    <p class="submit"></p>
 	</div>';
+	//<a href="#" id="get-cp" class="button button-primary button-large" >List City Pages</a>
 
 
 	echo toolbox_content($ret, 'city-pages');

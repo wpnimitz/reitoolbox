@@ -18,7 +18,7 @@ function webnotik_form_shortcode( $atts ){
 		$trust_badge = get_stylesheet_directory_uri() . '/assets/img/trust-badge.jpg';
 		$allow_trust_badge = get_option( 'allow_trust_badge');
 		if($form != "") {
-			$ret = '<div class="gform_wrapper webnotik-'.$type.'">';
+			$ret = '<div class="gform_wrapper webnotik-'.$type.' webnotik-form">';
 
 			if(!empty($source)) {
 				$ret .= str_replace("%source%", $source, do_shortcode($form));
