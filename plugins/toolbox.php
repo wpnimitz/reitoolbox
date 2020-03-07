@@ -504,7 +504,7 @@ function toolbox_divi_global_callback() {
 
 function toolbox_help_guidelines_callback() {
 	include("parsedown.php");
-	$contents = file_get_contents('README.md');
+	$contents = file_get_contents('./README.md');
 	$Parsedown = new Parsedown();
 	$ret =  $Parsedown->text($contents);
 
