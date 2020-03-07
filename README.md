@@ -21,10 +21,23 @@ Branding tab is solely focus on the form branding. If the main setting under **B
 
 All forms are using the same styling, you may need to adjust some custom style it. All forms include 3 main classes:
 
-*-**gform_wrapper** - very basic parent class to setup our default form style.
+-**gform_wrapper** - very basic parent class to setup our default form style.
 
-*-**webnotik-{form-type}** - to target specific form.
+-**webnotik-{form-type}** - to target specific form.
 
-*-**webnotik-form** - to target all forms.
+-**webnotik-form** - to target all forms.
+
+_**Shortcodes** is also available and indicated with each form.
 
 
+###City Pages
+**City pages** tab brings the more power to our process. It includes cloning and renaming pages for easy-process to add more pages for our client business.
+
+**[city_keywords]** - display the intended city keyword (city or estate) for that page.
+
+**[city_pages]** - display a list of cities. Following your list in the **city pages** tab.
+Check shortcode parameters.
+
+Name | Description
+---- | ----
+type | by default, the shortcode will produce a list of cities in UL LI format. If you want to use an inline format, just add _type=inline_ to your shortcode `[city_pages type=inline]`
