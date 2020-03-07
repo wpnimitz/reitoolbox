@@ -1,5 +1,5 @@
 <?php
-$tabs = array('Branding', 'Forms', 'City Pages', 'Divi Global', 'Help & Guidelines', 'Report');
+$tabs = array('Branding', 'Forms', 'City Pages', 'Divi Global', 'Help & Guidelines', 'Reports');
 include_once('toolbox-config.php');
 
 
@@ -512,9 +512,9 @@ function toolbox_help_guidelines_callback() {
 	echo toolbox_content($ret, 'help-guidelines');
 }
 
-function toolbox_report_callback() {
+function toolbox_reports_callback() {
 	$ret = 'Something awesome is coming here.';
-	echo toolbox_content($ret, 'report');
+	echo toolbox_content($ret, 'reports');
 }
 
  
