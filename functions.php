@@ -65,7 +65,4 @@ function form_submit_button( $button, $form ) {
 					<button class="et_pb_button et_pb_button_0 et_pb_bg_layout_light" id="'.$id.'">'.$text.'</button>
 				</div>';
 	}
-	
-
-	
 }

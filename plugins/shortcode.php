@@ -82,16 +82,38 @@ add_shortcode( 'current_year', 'display_current_year' );
 function display_copyright($atts) {
 	$atts = shortcode_atts(
 		array(
-			'year' => '',
+			'start' => '',
+			'power_name' => 'Webnotik Digital Agency',
+			'power_url' => 'https://webnotik.com'
 		), $atts, 'citypro_copyright' );
-	$year = $atts["year"];
+	$year = date("Y");
+	$start = $atts["start"];
+	$power_name = $atts["power_name"];
+	$power_url = $atts["power_url"];
+
+	if(!empty($start) && $start != $year) {
+		$final_year = $start . '-' .$year;
+	} else{
+		$final_year = $year;
+	}
 
 	if(!empty($year)) {
-		return 'Copyright &copy;' . $year . '-' . date("Y") . ' ' . get_bloginfo('name') .'. All rights reserved. Powered and maintained by <a href="https://webnotik.com">Webnotik Digital Agency</a>';
+		return 'Copyright &copy;' . $final_year . ' ' . get_bloginfo('name') .'. All rights reserved. Powered and maintained by <a href="'.$power_url.'" target="_blank">'.$power_name.'</a>';
 	}
 
 }
 add_shortcode( 'citypro_copyright', 'display_copyright' );
+
+function display_divi_layout($atts) {
+	$atts = shortcode_atts(
+		array(
+			'id' => '',
+		), $atts, 'show_layout' );
+	$id = $atts["id"];
+
+	return do_shortcode('[et_pb_section global_module="'.$id.'"][/et_pb_section]')
+}
+add_shortcode( 'show_layout', 'display_divi_layout' );
 
 
 function webnotik_business_shortcode( $atts ){  

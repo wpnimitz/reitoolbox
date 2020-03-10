@@ -52,3 +52,10 @@ Deprecated after Divi v4.0 has been released last October 17, 2019. The new divi
 
 ###Reports
 _Coming Soon_
+
+
+###Others
+Available shortcode
+[current_year] - display current year
+
+[show_layout id=n] - display any layout from divi, just change n for to the layout ID.
