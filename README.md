@@ -58,4 +58,9 @@ _Coming Soon_
 Available shortcode
 [current_year] - display current year
 
+_supported parameters_
+start = if client wanted to add start year like 2015-2000, just add 2015
+power_name = if this is a white label service, add power_name, it will replace **Wenotik Digital Agency**
+power_url = required by power_name, this will link the power_name
+
 [show_layout id=n] - display any layout from divi, just change n for to the layout ID.
