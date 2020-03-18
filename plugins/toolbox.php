@@ -234,8 +234,8 @@ function city_pages_field($name, $action = false, $count = 0, $class = "") {
 	if($action) {
 		$city_action = '<div class="actions inline-action">
 			<a title="Rename City Page" class="rename-cp" href="#">RP</a>
-			<a title="Delete this City Page Data" class="delete-cp" href="#">DD</a>
-			<a title="Clone this City Page Data" class="clone-cp" href="#">CD</a>
+			<a title="Delete this Data" class="delete-cp" href="#">DD</a>
+			<a title="Clone this City Page" class="clone-cp" href="#">CD</a>
 		</div>';
 		$url_action = '<div class="actions inline-action">
 			<a title="Verify URL" class="verify-cp" href="#">Verify</a>
