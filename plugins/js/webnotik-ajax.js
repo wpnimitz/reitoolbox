@@ -156,6 +156,14 @@ jQuery(document).ready(function( $ ) {
         window.open( 'http://www.google.com/search?q="' + url + '"', '_blank');
     })
 
+    $(".visit-cp").on("click", function(e) {
+        e.preventDefault();
+
+        var url = $(this).closest('.input-group').find('input').attr('value');
+        console.log(url); 
+        window.open( url , '_blank');
+    })
+
 	$(".rename-cp").on("click", function(e) {
 		e.preventDefault();
         $this = $(this);
@@ -206,4 +214,9 @@ jQuery(document).ready(function( $ ) {
           $(".message").removeClass('show');
         }, 2500);
     }
+
+    $(".map-try").on("click", function(e) {
+        var ckey = $("#city_keyword").val();
+        $(".map-try-wrapper").html('<iframe src="https://www.google.com/maps/embed?pb=Kent,+OH" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>');
+    });
 });

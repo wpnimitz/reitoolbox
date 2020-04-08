@@ -1,5 +1,5 @@
 <?php
-$tabs = array('Branding', 'Forms', 'City Pages', 'Divi Global', 'Help & Guidelines', 'Reports');
+$tabs = array('Branding', 'Forms', 'City Pages', 'CRM Shortcode', 'Help & Guidelines', 'Reports');
 include_once('toolbox-config.php');
 
 
@@ -9,10 +9,10 @@ function toolbox_admin_scripts_assets() {
 	$ver = "1.4.1" . strtotime("now");
 	// Add the color picker css file       
     wp_enqueue_style( 'wp-color-picker' );
-    wp_enqueue_style('toolbox-css', get_stylesheet_directory_uri() . '/plugins/css/webnotik.css?version='.$ver);
+    wp_enqueue_style('toolbox-css', CITYPRO_URL . '/plugins/css/webnotik.css?version='.$ver);
     //wp_enqueue_script('toolbox-webnotik', get_stylesheet_directory_uri() . '/plugins/js/webnotik.js?version='.$ver);
-    wp_enqueue_script( 'wp-color-picker-alpha', get_stylesheet_directory_uri() . '/plugins/js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), $ver, true );
-    wp_enqueue_script( 'get-city-pages-script', get_stylesheet_directory_uri() . '/plugins/js/webnotik-ajax.js?ver='.$ver, array( 'jquery' ), null, true );
+    wp_enqueue_script( 'wp-color-picker-alpha', CITYPRO_URL . '/plugins/js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), $ver, true );
+    wp_enqueue_script( 'get-city-pages-script', CITYPRO_URL . '/plugins/js/webnotik-ajax.js?ver='.$ver, array( 'jquery' ), null, true );
     wp_localize_script( 'get-city-pages-script', 'get_city_pages_data', array('ajaxurl' => admin_url( 'admin-ajax.php' )) );
 }
 
@@ -20,7 +20,7 @@ function toolbox_admin_scripts_assets() {
 add_action('admin_menu', 'toolbox_admin_menu_999');
 function toolbox_admin_menu_999() {
 	global $tabs;
-    add_menu_page( __('Toolbox Pro', 'toolbox-pro'), __('Toolbox PRO', 'toolbox-pro'), 'manage_options', 'toolbox-general', 'show_toolbox_content_callback', 'dashicons-flag', 3);
+    add_menu_page( __('City Page Pro', 'citypage-pro'), __('City Page Pro', 'citypage-pro'), 'manage_options', 'toolbox-general', 'show_toolbox_content_callback', 'dashicons-flag', 3);
     add_action( 'admin_init', 'toolbox_settings' );
 
     for ($i=0; $i < count($tabs); $i++) {
@@ -123,7 +123,7 @@ function rename_city_pages_callback() {
 		$my_post = array(
 			'ID'           => $mypost_id,
 			'post_title'   => 'We Buy Houses in ' . $new_title,
-			'post_name'	   => str_replace(" ", "-", strtolower('We Buy Houses in ' . $new_title)) 
+			'post_name'	   => str_replace(" ", "-", strtolower('We Buy Houses ' . $new_title)) 
 		);
 
 		// Update the post into the database
@@ -172,6 +172,8 @@ function clone_city_page_callback() {
 	        add_post_meta( $new_post_id, $key, $value );
 	      }
 	    }
+
+	    update_post_meta($new_post_id, 'city_map', '');
 
 		$success["post_title"] = $new_title;
 		$success["post_name"] = get_the_permalink($new_post_id);
@@ -233,12 +235,13 @@ function city_pages_field($name, $action = false, $count = 0, $class = "") {
 	$url_action = '';
 	if($action) {
 		$city_action = '<div class="actions inline-action">
-			<a title="Rename City Page" class="rename-cp" href="#">RP</a>
-			<a title="Delete this Data" class="delete-cp" href="#">DD</a>
-			<a title="Clone this City Page" class="clone-cp" href="#">CD</a>
+			<a title="Rename City Page" class="rename-cp" href="#">Rename</a>
+			<a title="Delete this Data" class="delete-cp" href="#">Delete</a>
+			<a title="Clone this City Page" class="clone-cp" href="#">Clone</a>
 		</div>';
 		$url_action = '<div class="actions inline-action">
 			<a title="Verify URL" class="verify-cp" href="#">Verify</a>
+			<a title="Visit" class="visit-cp" href="#">Visit Page</a>
 		</div>';
 	}
 
@@ -379,6 +382,7 @@ function show_toolbox_content_callback() {
 
 	$ret = '<p>Welcome to general settings. Output any shortcode in any of your wordpress page and we will instantly convert any data to seo rich snippets.</p>';	
 	
+
 	$ret .= toolbox_fields('text', 'Business Name', 'general', array('help' => '[webnotik business="name"]'));
 	$ret .= toolbox_fields('text', 'Business Phone Number', 'general', array('help' => '[webnotik business="phone_number"]'));
 	$ret .= toolbox_fields('text', 'Business Email Address', 'general', array('help' => '[webnotik business="email_address"]'));
@@ -387,6 +391,7 @@ function show_toolbox_content_callback() {
 	$ret .= toolbox_fields('text', 'Business Logo URL', 'general', array('help' => '[webnotik business="logo_url"]'));
 	$ret .= toolbox_fields('text', 'Privacy URL', 'general',  array('help' => '[legal_pages for="privacy"]'));
 	$ret .= toolbox_fields('text', 'Terms of Use URL', 'general', array('help' => '[legal_pages for="terms"]'));
+	$ret .= toolbox_fields('checkbox', 'Allow Default Form CSS', 'general');
 
 	$ret .= get_submit_button();
 
@@ -400,8 +405,9 @@ function show_toolbox_content_callback() {
 }
 
 function toolbox_branding_callback() {
-	$ret = '<p>Welcome to your branding settings. Please use this page to easily change for this template.</p>';	
-	
+	$ret .= toolbox_fields('select', 'Allow Use of Branding?', 'branding', array('hint' => 'The branding below will be used only if this field is set to Yes.'), array("No","Yes"));
+	$ret = '<p>This section is deprecated. Welcome to your branding settings. Please use this page to easily change for this template.</p>';
+
 	$ret .= toolbox_fields('select', 'Round Corners?', 'branding', false, array("No","Yes"));
 	$ret .= toolbox_fields('text', 'Round Corners PX', 'branding', array('hint' => 'add <strong>rounded_corners</strong> to module or row class.'));
 	$ret .= toolbox_fields('text', 'Main Branding Color', 'branding', array('hint' => 'Use for the city keyword color in hero section'), false, 'wda_color_picker', array('alpha' => 'true'));
@@ -475,9 +481,11 @@ function toolbox_city_pages_callback() {
 	$ret .= city_pages_field('City #<span>1</span>', true, 1, 'main-sub-keyword');
 	$ret .=  '<div class="extra-keywords" id="sortable">';
 	$city_count = 2;
-	for ($i=2; $i < count($city_pages["names"]); $i++) { 
-		$ret .= city_pages_field('City #<span>' . $city_count . '</span>', true, $city_count);
-		$city_count++;
+	if(is_array($city_pages)) {
+		for ($i=2; $i < count($city_pages["names"]); $i++) { 
+			$ret .= city_pages_field('City #<span>' . $city_count . '</span>', true, $city_count);
+			$city_count++;
+		}
 	}
 	$ret .=  '</div>';
 
@@ -505,7 +513,8 @@ function toolbox_divi_global_callback() {
 
 function toolbox_help_guidelines_callback() {
 	include("parsedown.php");
-	$contents = file_get_contents(get_stylesheet_directory() . '/README.md');
+	$file_path = CITYPRO_PATH . '/README.md';
+	$contents = file_get_contents( $file_path );
 	$Parsedown = new Parsedown();
 	$ret =  $Parsedown->text($contents);
 

@@ -111,7 +111,7 @@ function display_divi_layout($atts) {
 		), $atts, 'show_layout' );
 	$id = $atts["id"];
 
-	return do_shortcode('[et_pb_section global_module="'.$id.'"][/et_pb_section]')
+	return do_shortcode('[et_pb_section global_module="'.$id.'"][/et_pb_section]');
 }
 add_shortcode( 'show_layout', 'display_divi_layout' );
 
@@ -119,7 +119,7 @@ add_shortcode( 'show_layout', 'display_divi_layout' );
 function webnotik_business_shortcode( $atts ){  
 	$atts = shortcode_atts(
 		array(
-			'business' => 'seller',
+			'business' => 'weburl',
 			'text' => 'LINK',
 		), $atts, 'webnotik' );
 	$business = $atts["business"];
@@ -130,8 +130,12 @@ function webnotik_business_shortcode( $atts ){
 
 	if(!$data = wp_cache_get('wda_' . $business, 'wda_' . $business . '_data')) {
 		if($business == "weburl") {
-			$data = get_site_url();
+
+			if(!empty($text)) {
+				$date = '<a href="'.get_site_url().'">' . $text . '</a>'; 
+			}
 			wp_cache_add( 'wda_' . $business, $data, 'wda_' . $business . '_data' );
+			return $data;
 		}
 
 		if(in_array($business, $allowed_types)) {
@@ -242,7 +246,7 @@ function webnotik_city_keywords( $atts ){
 		array(
 			'type' => 'single', //or inline
 			'item' => 'main'
-		), $atts, 'city_keywords' );
+		), $atts);
 
 	$type = $atts["type"];
 	$item = $atts["item"];
@@ -257,7 +261,7 @@ function webnotik_city_keywords( $atts ){
 			return '<span class="city city-meta">' . $city_keyword . '</span>';
 		} else {
 			if(!is_page()) {
-				return '<span class="city not-page">City Keyword</span>';
+				return '<span class="city not-page">City Name</span>';
 			}
 		}
 	}
@@ -278,4 +282,29 @@ function webnotik_city_keywords( $atts ){
 		
 	return '<span class="city city-'.$post_title.'">' . $ret . '</span>';
 }
-add_shortcode( 'city_keywords', 'webnotik_city_keywords' );
+add_shortcode( 'city_keywords', 'webnotik_city_keywords' ); //needs to be deprecated
+add_shortcode( 'city_name', 'webnotik_city_keywords' );
+
+
+
+function webnotik_city_map( $atts ){
+	global $post;
+	$city_map = htmlspecialchars_decode(get_post_meta( $post->ID, 'city_map', true));
+		
+	return '<div class="city-map">' . $city_map . '</div>';
+}
+add_shortcode( 'city_map', 'webnotik_city_map' ); 
+
+
+function webnotik_geo_number( $atts ){
+	global $post;
+	$geo_number = get_post_meta( $post->ID, 'geo_number', true);
+
+	if(empty($geo_number)) {
+		$business_data = get_option( 'general' );
+		$geo_number = $business_data['business_phone_number'];
+	}
+		
+	return '<div class="geo-number">' . $geo_number . '</div>';
+}
+add_shortcode( 'geo_number', 'webnotik_geo_number' ); 

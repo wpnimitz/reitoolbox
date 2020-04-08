@@ -395,6 +395,39 @@ span.city {
 
 
 
+/** META BOX **/
+.city-page-details .form-group {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.city-page-details label {
+  font-weight: 700;
+  padding-bottom: 5px;
+  display: block;
+}
+
+.city-page-details textarea {
+  min-height: 200px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.city-page-details label .map-try {
+  background: #017cba;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.city-page-details .map-try-wrapper {
+  max-width: 600px;
+  max-height: 300px;
+}
+
+
+
 
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the panel-nav (.icon) */

@@ -10,7 +10,7 @@ $css .= '**/';
 
 
 if(empty($hero_background_image)) {
-	$hero_background_image = get_stylesheet_directory_uri() . '/assets/img/no-bg.jpg';
+	$hero_background_image = CITYPRO_URL . 'assets/img/no-bg.jpg';
 }
 $css .= '
 .webnotik-pages .hero-background {
