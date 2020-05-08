@@ -49,6 +49,7 @@ function citypage_pro_metabox_callback( $meta_id ) {
 	echo '<label for="geo_number">Geo Phone Number</label>';
 	echo '<input id="geo_number" type="text" value="'.$geo_number.'" placeholder="" name="geo_number">';
 	echo '<span style="display:block">Usage: [geo_number].</span>';
+	echo '<span style="display:block">If this is empty, it will show the business phone number instead.</span>';
 	echo '</div>'; //end form-group
 
 
@@ -58,8 +59,28 @@ function citypage_pro_metabox_callback( $meta_id ) {
 	echo '<span style="display:block">Make sure to grab your map from Google Maps and select small in the embed code.</span>';
 	echo '<textarea id="city_map" type="text" placeholder="" name="city_map">'.$city_map.'</textarea>';
 	echo '<span style="display:block">Usage: [city_map].</span>';
+	echo '<span style="display:block">If this is empty, it will show the business map in the toolbox\'s general settings.</span>';
 	echo '<div class="map-try-wrapper"></div>';
 	echo '</div>'; //end form-group
+
+
+	echo '<div><h4>The Following Fields is not necessary, but you can use them and the default value is whatever default you have on the toolbox general settings</h4></div>';
+
+
+	echo '<div class="form-group">';
+	$business_name = get_post_meta( $meta_id->ID, 'business_name', true);
+	echo '<label for="business_name">Business Name</label>';
+	echo '<input id="business_name" type="text" value="'.$business_name.'" placeholder="" name="business_name">';
+	echo '<span style="display:block">Usage: [business_name].</span>';
+	echo '</div>'; //end form-group
+
+	echo '<div class="form-group">';
+	$email_address = get_post_meta( $meta_id->ID, 'email_address', true);
+	echo '<label for="email_address">Email Address</label>';
+	echo '<input id="email_address" type="text" value="'.$email_address.'" placeholder="" name="email_address">';
+	echo '<span style="display:block">Usage: [email_address].</span>';
+	echo '</div>'; //end form-group
+
 
 
 	// echo '<div class="form-group">';
@@ -101,8 +122,12 @@ function rental_meta_box_save_metabox( $post_id ) {
     update_post_meta($post_id, 'city_map', htmlspecialchars($_POST['city_map']));      
   }
 
-  if ( isset($_POST['city_indexed']) ) {        
-    update_post_meta($post_id, 'city_indexed', sanitize_text_field($_POST['city_indexed']));      
+  if ( isset($_POST['business_name']) ) {        
+    update_post_meta($post_id, 'business_name', sanitize_text_field($_POST['business_name']));      
+  }
+
+  if ( isset($_POST['email_address']) ) {        
+    update_post_meta($post_id, 'email_address', sanitize_text_field($_POST['email_address']));      
   }
 
 }

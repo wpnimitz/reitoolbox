@@ -37,11 +37,11 @@
 
 .panel-body .form-group {
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .panel-body .form-field p:before {
-  content: "Usage: ";
+  content: "Shortcode: ";
   font-weight: 500;
 }
 
@@ -73,7 +73,7 @@
   background: #f1f1f1;
   border-radius: 3px;
   border: 1px solid #ccc;
-  margin-top: 5px !important;
+  margin-top: 2px !important;
   max-width: 100%;
 }
 
@@ -291,11 +291,27 @@
   font-size: 12px;
 }
 
+span.hot {
+  padding: 3px 6px;
+  background: #ff0018;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 8px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
 .webnotik-re-wrapper .input-group {
   background: rgba(0, 0, 0, 0.10);
   padding: 2px;
   border-radius: 2px;
   display: flex;
+}
+
+.webnotik-re-wrapper .input-group.form-wda_color_picker {
+  background: transparent;
 }
 
 .k-main input, .k-main .inline-action {
@@ -357,6 +373,22 @@ span.city {
 
 .wp-picker-container input[type=text].wp-color-picker {
     max-width: 150px !important;
+}
+
+.webnotik-re-wrapper table.reports {
+  max-width: initial;
+}
+
+.webnotik-re-wrapper table.reports h4 {
+  margin: 1.5em 0px 0px;
+}
+
+.webnotik-re-wrapper table.reports h4:first-child {
+    margin-top: 0;
+}
+
+.webnotik-re-wrapper table.reports th, .webnotik-re-wrapper table.reports td {
+    text-align: left;
 }
 
 

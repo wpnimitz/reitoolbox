@@ -10,6 +10,14 @@ In **General** tab, all shortcode is given. However, we have added few more shor
 
 **[webnotik business=weburl]** - display the current address of the website.
 
+The **text** parameter is support for Phone Number and email address with "link" as it's value
+
+Name | Description
+---- | ----
+text | Default to text or plain html. Other value is _link_ which output a link version of the information. Works best for Phone Number and Email Address
+phone | **[webnotik business=phone_number text=link]** - support for Phone Linking
+email | **[webnotik business=email_address text=link]** - support for Email Linking
+
 
 ###Branding
 
@@ -27,7 +35,7 @@ All forms are using the same styling, you may need to adjust some custom style i
 
 -**webnotik-form** - to target all forms.
 
-_**Shortcodes** is also available and indicated with each form.
+_**Shortcodes**_ is also available and indicated with each form.
 
 
 ###City Pages
@@ -64,3 +72,24 @@ power_name = if this is a white label service, add power_name, it will replace *
 power_url = required by power_name, this will link the power_name
 
 [show_layout id=n] - display any layout from divi, just change n for to the layout ID.
+
+
+###Updates 
+As of 5-7-2020 V 1.5.6
+- Update Reports tab.
+- Create a report for pages
+- Report tabs display all (recommended) pages that don't have any seo description
+- Report tabs display all (recommended) pages that don't have any seo title
+- Report tabs display all (recommended) pages that don't have a graph image
+- Added view page to easy access the page that you want to confirm or edit.
+- Create a report for forms
+- list down all forms via gravity forms
+- recommend forms field depending on the form name
+- identify if the form have a notification for admin
+- identify if the form is sending notification for correct admin notification
+- added three action types, edit, settings and notification for convenience
+- added placeholder to settings field
+- Change the "Add New Page" to "Add New Data" under the City Pages tab to reflect the button functionality.
+- remove all fields description in city pages.
+- Added Business Owner Name
+- Added Notification Email Field

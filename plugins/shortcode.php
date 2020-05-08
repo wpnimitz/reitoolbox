@@ -80,16 +80,18 @@ function display_current_year($atts) {
 add_shortcode( 'current_year', 'display_current_year' );
 
 function display_copyright($atts) {
+	$general = get_option('general');
+
 	$atts = shortcode_atts(
 		array(
-			'start' => '',
-			'power_name' => 'Webnotik Digital Agency',
-			'power_url' => 'https://webnotik.com'
-		), $atts, 'citypro_copyright' );
+			'start_year' => (!empty($general["start_year"]) ? $general["start_year"] : date("Y")),
+			'credit_company_name' => (!empty($general["credit_company_name"]) ? $general["credit_company_name"] : 'Top Results Consulting'),
+			'credit_company_url' => (!empty($general["credit_company_url"]) ? $general["credit_company_url"] : 'https://topresultsconsulting.com')
+		), $atts, 'footer_credits' );
 	$year = date("Y");
-	$start = $atts["start"];
-	$power_name = $atts["power_name"];
-	$power_url = $atts["power_url"];
+	$start = $atts["start_year"];
+	$power_name = $atts["credit_company_name"];
+	$power_url = $atts["credit_company_url"];
 
 	if(!empty($start) && $start != $year) {
 		$final_year = $start . '-' .$year;
@@ -98,11 +100,11 @@ function display_copyright($atts) {
 	}
 
 	if(!empty($year)) {
-		return 'Copyright &copy;' . $final_year . ' ' . get_bloginfo('name') .'. All rights reserved. Powered and maintained by <a href="'.$power_url.'" target="_blank">'.$power_name.'</a>';
+		return 'Copyright &copy;' . $final_year . ' ' . get_bloginfo('name') .'. All rights reserved. Powered and Maintained by <a href="'.$power_url.'" target="_blank">'.$power_name.'</a>';
 	}
 
 }
-add_shortcode( 'citypro_copyright', 'display_copyright' );
+add_shortcode( 'footer_credits', 'display_copyright' );
 
 function display_divi_layout($atts) {
 	$atts = shortcode_atts(
@@ -126,9 +128,9 @@ function webnotik_business_shortcode( $atts ){
 	$text = $atts["text"];
 	$ret = '';
 
-	$allowed_types = array("weburl","name", "phone_number", "email_address", "address", "address_line_1", "address_line_2", "logo_url");
+	$allowed_types = array("weburl","name", "phone_number", "email_address", "address", "address_line_1", "address_line_2", "logo_url", "business_map");
 
-	if(!$data = wp_cache_get('wda_' . $business, 'wda_' . $business . '_data')) {
+	if(!$data = wp_cache_get('wda_' . $business, 'wda_' . $business . '_data_'. $text)) {
 		if($business == "weburl") {
 
 			if(!empty($text)) {
@@ -153,7 +155,16 @@ function webnotik_business_shortcode( $atts ){
 			}
 		}
 		$data =  '<span class="info-'.$business.'">'.$ret.'</span>';
-		wp_cache_add( 'wda_' . $business, $data, 'wda_' . $business . '_data' );
+
+
+		if($text == "link" && $business == "phone_number") {
+			$data =  '<span class="info-'.$business.'"><a href="tel:'.$ret.'">'.$ret.'</a></span>';
+		}
+		if($text == "link" && $business == "email_address") {
+			$data =  '<span class="info-'.$business.'"><a href="mailto:'.$ret.'">'.$ret.'</a></span>';
+		}
+
+		wp_cache_add( 'wda_' . $business, $data, 'wda_' . $business . '_data_'. $text );
 	}
 	return $data;		
 }
@@ -242,45 +253,24 @@ add_shortcode( 'city_pages', 'webnotik_city_pages' );
 
 function webnotik_city_keywords( $atts ){
 	global $post;
-	$atts = shortcode_atts(
-		array(
-			'type' => 'single', //or inline
-			'item' => 'main'
-		), $atts);
 
-	$type = $atts["type"];
-	$item = $atts["item"];
+	//$city_keyword = get_post_meta($post->ID, 'city_keyword', true);
+	$city_name = get_post_meta($post->ID, 'city_name', true);
 
-	if(is_front_page()) {
-		$city_pages_data = get_option('city_pages');
-		$target = $city_pages_data["names"][0];
-		return '<span class="city city-'.$target.'">' . $target . '</span>';
+	if(!empty($city_name)) {
+		return '<span class="city city-meta">' . $city_name . '</span>';
 	} else {
-		$city_keyword = get_post_meta($post->ID, 'city_keyword', true);
-		if(!empty($city_keyword)) {
-			return '<span class="city city-meta">' . $city_keyword . '</span>';
+		if( !is_page() ) {
+			return '<span class="city not-page">City Name</span>';
 		} else {
-			if(!is_page()) {
-				return '<span class="city not-page">City Name</span>';
-			}
+			$city_pages = get_option('city_pages');
+			$main_target = $city_pages["names"][0];
+			return '<span class="city city-none">' . $main_target . '</span>';
 		}
 	}
 
-	
-	$exclude_words = array( 'for', 'my', 'in', 'In', 'We', 'Buy', 'Houses', 'House', 'Cash', 'Fast', 'Sell');
-	$post_title = get_the_title($post->ID);
 
-	foreach ($exclude_words as $ex_word) {
-		$post_title = str_replace($ex_word, '', $post_title);
-	}
-	
-	if(!empty($post_title)) {
-		$ret = $post_title;
-	} else {
-		$ret = 'City Name';
-	}
-		
-	return '<span class="city city-'.$post_title.'">' . $ret . '</span>';
+
 }
 add_shortcode( 'city_keywords', 'webnotik_city_keywords' ); //needs to be deprecated
 add_shortcode( 'city_name', 'webnotik_city_keywords' );
@@ -290,6 +280,11 @@ add_shortcode( 'city_name', 'webnotik_city_keywords' );
 function webnotik_city_map( $atts ){
 	global $post;
 	$city_map = htmlspecialchars_decode(get_post_meta( $post->ID, 'city_map', true));
+
+	if(empty($city_map)) {
+		$business_data = get_option( 'general' );
+		$city_map = $business_data['business_map'];
+	}
 		
 	return '<div class="city-map">' . $city_map . '</div>';
 }
@@ -305,6 +300,30 @@ function webnotik_geo_number( $atts ){
 		$geo_number = $business_data['business_phone_number'];
 	}
 		
-	return '<div class="geo-number">' . $geo_number . '</div>';
+	return $geo_number;
 }
-add_shortcode( 'geo_number', 'webnotik_geo_number' ); 
+add_shortcode( 'geo_number', 'webnotik_geo_number' );
+
+
+function webnotik_business_name( $atts ){
+	global $post;
+	$business_name = get_post_meta( $post->ID, 'business_name', true);
+	if(empty($business_name)) {
+		$business_data = get_option( 'general' );
+		$business_name = $business_data['business_name'];
+	}		
+	return $business_name;
+}
+add_shortcode( 'business_name', 'webnotik_business_name' ); 
+
+
+function webnotik_email_address( $atts ){
+	global $post;
+	$email_address = get_post_meta( $post->ID, 'email_address', true);
+	if(empty($email_address)) {
+		$business_data = get_option( 'general' );
+		$email_address = $business_data['business_email_address'];
+	}		
+	return $email_address;
+}
+add_shortcode( 'email_address', 'webnotik_email_address' ); 

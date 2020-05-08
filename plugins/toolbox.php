@@ -1,5 +1,5 @@
 <?php
-$tabs = array('Branding', 'Forms', 'City Pages', 'CRM Shortcode', 'Help & Guidelines', 'Reports');
+$tabs = array('Branding', 'Forms', 'City Pages', 'Help & Guidelines', 'Reports');
 include_once('toolbox-config.php');
 
 
@@ -50,7 +50,7 @@ function toolbox_admin_bar_render() {
     $wp_admin_bar->add_menu(
 	    array(
 	        'id' => 'toolbox-general',
-	        'title' => __('Toolbox'),
+	        'title' => __('City Page Pro'),
 	        'href' => admin_url( 'admin.php?page=toolbox-general')
 	    )	    
 	);
@@ -240,8 +240,8 @@ function city_pages_field($name, $action = false, $count = 0, $class = "") {
 			<a title="Clone this City Page" class="clone-cp" href="#">Clone</a>
 		</div>';
 		$url_action = '<div class="actions inline-action">
-			<a title="Verify URL" class="verify-cp" href="#">Verify</a>
-			<a title="Visit" class="visit-cp" href="#">Visit Page</a>
+			<a title="Google Index Verify" class="verify-cp" href="#">Verify</a>
+			<a title="View City Page" class="visit-cp" href="#">View</a>
 		</div>';
 	}
 
@@ -254,16 +254,16 @@ function city_pages_field($name, $action = false, $count = 0, $class = "") {
     	<div class="form-field">
     		<div class="col-2 k-main">
     			<div class="input-group">
-	    			<input type="text" name="city_pages[names][]" id="'.$name.'" value="'.$value1.'">
+	    			<input type="text" name="city_pages[names][]" id="'.$name.'" value="'.$value1.'" placeholder="Enter City Name">
 	    			'.$city_action.'
 	    		</div>
-	    		<p class="hint">Enter focus city or state here.</p>
+	    		<!-- <p class="hint">Enter focus city or state here.</p> -->
 	    	</div><div class="col-2 k-value">
 	    		<div class="input-group">
-	    			<input type="url" name="city_pages[urls][]" id="'.$name.'_url" value="'.$value2.'">
+	    			<input type="url" name="city_pages[urls][]" id="'.$name.'_url" value="'.$value2.'" placeholder="Enter URL">
 	    			'.$url_action.'
 	    		</div>
-    			<p class="hint">Enter page URL. Very usefull for automatic linking.</p>
+    			<!-- <p class="hint">Enter page URL. Very usefull for automatic linking.</p> -->
 	    	</div>
     	</div>
     </div>';
@@ -299,11 +299,11 @@ function toolbox_fields($type = 'text', $name, $group = false, $help = false, $o
 	}
 
 	$value = get_toolbox_option($name, $group);
-	$ret .= '<div class="form-field">';
+	$ret .= '<div class="form-field input-group form-'.$class.'">';
 	switch ($type) {
 		case 'text':
 		case 'number':
-			$ret .= '<input class="'.$class.'" type="'.$type.'" name="'.$final_name.'" id="'.$name.'" value="'.$value.'" '.(isset($data) ? $data : '').'>';
+			$ret .= '<input class="'.$class.'" type="'.$type.'" name="'.$final_name.'" id="'.$name.'" value="'.$value.'" '.(isset($data) ? $data : '').' placeholder="Enter '.$label.'">';
 			break;
 		case 'select':
 			$ret .= '<select class="'.$class.'" name="'.$final_name.'" id="'.$name.'" '.(isset($data) ? $data : '').'>';
@@ -349,8 +349,8 @@ function toolbox_content($body, $tab = 'general') {
 		<div class="message"></div>
 		<div class="panel">
 			<div class="panel-header">
-				<h1>Welcome to REI Toolbox Settings</h1>
-				<p>Speeding the process of development phase for Real Estate Investors' websites.</p>
+				<h1>Welcome to City Page Pro Settings</h1>
+				<p>Speeding the process of templated development website phase</p>
 				
 			</div>
 			<div class="panel-navigation">
@@ -389,9 +389,18 @@ function show_toolbox_content_callback() {
 	$ret .= toolbox_fields('text', 'Business Address Line 1', 'general', array('help' => '[webnotik business="address_line_1"]'));
 	$ret .= toolbox_fields('text', 'Business Address Line 2', 'general', array('help' => '[webnotik business="address_line_2"]'));
 	$ret .= toolbox_fields('text', 'Business Logo URL', 'general', array('help' => '[webnotik business="logo_url"]'));
+	$ret .= toolbox_fields('textarea', 'Business Map', 'general', array('help' => '[webnotik business="business_map"]', 'hint' => 'Please use a google map embed code. Make sure to change the width to 100% and height to 300.'));
+	$ret .= '<h3>Footer Credits</h3>';
+	$ret .= '<p class="hint">[footer_credits]</p>';
+	$ret .= toolbox_fields('text', 'Start Year', 'general', array('hint' => 'You can leave this blank. Start year may be needed for some business. It will look like this 2018-' . date("Y")));
+	$ret .= toolbox_fields('text', 'Credit Company Name', 'general', array('hint' => 'Defaults: Top Results Consuling; when leave empty'));
+	$ret .= toolbox_fields('text', 'Credit Company URL', 'general', array('hint' => 'Defaults: https://topresultsconsulting.com; when leave empty'));
+
+	$ret .= '<h3>Other</h3>';
+	$ret .= toolbox_fields('text', 'Business Owner Name', 'general', array('hint' => 'Use for reporting'));
+	$ret .= toolbox_fields('text', 'Notification Email', 'general', array('hint' => 'Use for reporting'));
 	$ret .= toolbox_fields('text', 'Privacy URL', 'general',  array('help' => '[legal_pages for="privacy"]'));
 	$ret .= toolbox_fields('text', 'Terms of Use URL', 'general', array('help' => '[legal_pages for="terms"]'));
-	$ret .= toolbox_fields('checkbox', 'Allow Default Form CSS', 'general');
 
 	$ret .= get_submit_button();
 
@@ -399,6 +408,9 @@ function show_toolbox_content_callback() {
 			<p>Other shortcode available</p>
 			<p>[webnotik business="address"] -> combine address line 1 and 2 in once complete address. Perfect for the footer.</p>
 			<p>[webnotik business="weburl"] -> display complete url of the website. Perfect for legal pages.</p>
+			<p>[webnotik business=phone_number text=link] - support for Phone Linking</p>
+			<p>[webnotik business=email_address text=link] - support for Email Linking</p>
+			<p>[footer_credits]</p>
 	
 	</div>';
 	echo toolbox_content($ret, 'general');
@@ -430,10 +442,10 @@ function toolbox_branding_callback() {
  
 
 	//#TODO
-	/**
+	/*
 		Need to remove this one since special pages have their own settings and mostly matters with the design on the homepage
 		Also, their is a new function of Divi (Theme Builder) that defeats the purpose of this functionality.
-	**/
+	*/
 	// $ret .= '<h3>Special Pages</h3>';
 	// $ret .= '<p>Perfect for Thank You and 404 Pages. Make sure to add <strong>special-page</strong> class to the section class settings.</p>';
 	// $ret .= toolbox_fields('text', 'Special Page Background Color', 'branding', false, false, 'wda_color_picker');
@@ -475,9 +487,13 @@ function toolbox_city_pages_callback() {
 	$city_pages = get_option('city_pages');
 
 	$ret =  '<h2>Welcome to REI Toolbox City Pages Data Builder</h2>';	
-	$ret .=  '<p>In this section, you can rename, delete and even clone your currrent city page landing page. Just make sure you provide the correct name and correct url to make it work properly.</p>';
+	$ret .=  '<p>This is only a data collection for all city pages for our project. To help you ease up with the development, 
+	we have functions to help you clone any page and or rename here without going to the pages.</p>';
 	
-	$ret .= city_pages_field('Main State');
+	$ret .= toolbox_fields('text', 'Before Title', 'city_pages');
+	$ret .= toolbox_fields('text', 'After Title', 'city_pages');
+	$ret .= '<hr>';
+	$ret .= city_pages_field('Main Target');
 	$ret .= city_pages_field('City #<span>1</span>', true, 1, 'main-sub-keyword');
 	$ret .=  '<div class="extra-keywords" id="sortable">';
 	$city_count = 2;
@@ -491,7 +507,7 @@ function toolbox_city_pages_callback() {
 
 	$ret .=  '<div class="options">';
     $ret .= get_submit_button();
-	$ret .=  '<p class="submit"><a href="#" id="submit" class="button button-primary button-large add-sub-keyword">Add new city page</a></p>
+	$ret .=  '<p class="submit"><a href="#" id="submit" class="button button-primary button-large add-sub-keyword">Add new record</a></p>
 	    <p class="submit"></p>
 	</div>';
 	//<a href="#" id="get-cp" class="button button-primary button-large" >List City Pages</a>
@@ -500,14 +516,21 @@ function toolbox_city_pages_callback() {
 	echo toolbox_content($ret, 'city-pages');
 }
 
-function toolbox_divi_global_callback() {
+function toolbox_crm_shortcode_callback() {
 
-	$ret = '<p>Here\'s the most important part. Very useful for header and footer sections.</p>';
-	$ret .= toolbox_fields('text', 'Blog Post - After Content', 'divi_global', array('help' => 'ADD any divi global layouts ID to the field above. IDs must be separated with commas.'));
+
+	$ret = '<h3>You can create a shortcode for your Realeflow CRM here.</h3>';
+	$ret = '<h4>This function is deprecated.</h4>';
+	$ret .= toolbox_fields('text', 'Account ID', 'crm-shortcode');
+	$ret .= toolbox_fields('text', 'Assign Autoresponder', 'crm-shortcode');
+	$ret .= toolbox_fields('text', 'Redirect URL', 'crm-shortcode');
+	$ret .= toolbox_fields('select', 'Contact Type', 'crm-shortcode', false, array("Seller","Buyer"));
+	$ret .= toolbox_fields('text', 'Button Text', 'crm-shortcode');
+
 
 	$ret .= get_submit_button();
 
-	echo toolbox_content($ret, 'divi-global');
+	echo toolbox_content($ret, 'crm-shortcode');
 }
 
 
@@ -522,8 +545,172 @@ function toolbox_help_guidelines_callback() {
 }
 
 function toolbox_reports_callback() {
-	$ret = 'Something awesome is coming here.';
+	$ret = '<h2>Reports for '.get_bloginfo('name').'</h2>';
+	$priority_pages = array("home", "we buy", "buyer", "agent", "investor", "contractor");
+	/*
+	Generating Reports for all pages - Simplified Version
+	*/
+	$page_arg = array( 'post_type' => 'page', 'post_status' => 'publish', 'numberposts' => '-1');
+	$pages = get_posts($page_arg);
+
+	$ret .= '<h3>All Pages</h3>';
+	$ret .= '<p style="margin-top: -15px">The seo columns checks for SEO description, SEO image, 
+	as well as verify the SEO title and description for each priority page 
+	for this project/website. Currently, the setup for priority page is with the following 
+	page titles: "home, we buy" and most importantly, any page that uses the city name meta field. </p>';
+
+	
+	$ret .= '<table class="widefat fixed reports" cellspacing="0">';
+
+	$ret .= '<thead>';
+	$ret .= '<td>Name</td>';
+	$ret .= '<td>SEO</td>';
+	$ret .= '<td>Action</td>';
+	$ret .= '</thead>'; //end of TR
+
+	$counter = 0;
+	foreach ($pages as $page) {
+		$post_id = $page->ID;
+		$post_title = $page->post_title;
+		$seo_title = get_post_meta($post_id, '_yoast_wpseo_opengraph-title', true);
+		$seo_description = get_post_meta($post_id, '_yoast_wpseo_opengraph-description', true);
+		$seo_image = get_post_meta($post_id, '_yoast_wpseo_opengraph-image', true);
+		$city_name = get_post_meta($post_id, 'city_name', true);
+
+
+		$seo_label = '';
+		if(empty($seo_description)) {
+			$seo_label .= priority_checker($priority_pages,$post_title) ? 'Add a SEO Description <br>' : '';
+		}
+		if(empty($seo_image)) {
+			$seo_label .= priority_checker($priority_pages,$post_title) ? 'Please attach graph image <br>' : '';
+		}
+		if(!empty($city_name)) {
+			$seo_label .= string_verify($seo_title, $city_name) ? '' : 'Missing <strong>'.$city_name.'</strong> on your SEO title <br>';
+			$seo_label .= string_verify($seo_description, $city_name) ? '' : 'Missing <strong>'.$city_name.'</strong> on your SEO description <br>';
+		}
+
+		if(!empty($seo_label)) {
+			$ret .= '<tr>';
+			$ret .= '<td>'. $post_title .'</td>';
+			$ret .= '<td>'. $seo_label .'</td>';
+			$ret .= '<td class="actions"><a href="'. get_the_permalink($post_id) .'" target="_blank">View</a></td>';
+			$ret .= '</tr>'; //end of TR
+		}
+
+		
+		$counter++;
+	}
+	
+
+	$ret .= '</table>'; //end of TABLE
+	$ret .= '<p>Page Total: '. $counter.'</p>';
+
+
+	$ret .= '<h3>Forms Integration Guide</h3>';	
+	$ret .= '<table class="widefat fixed reports forms" cellspacing="0">';
+
+	$ret .= '<thead>';
+	$ret .= '<td>Name</td>';
+	$ret .= '<td>Description</td>';
+	$ret .= '<td>Action</td>';
+	$ret .= '</thead>'; //end of TR
+
+
+	$expected_forms = array('seller', 'buyer', 'agent', 'investor', 'contact');
+	$expected_fields = array(
+		'seller' => array("Name", "Phone Number", "Email Address", "Form URL", "Lead Source"),
+		'buyer' => array("Name", "Phone Number", "Email Address", "Form URL", "Lead Source"),
+		'agent' => array("Name", "Phone Number", "Email Address", "Form URL", "Lead Source"),
+		'investor' => array("Name", "Phone Number", "Email Address", "Form URL", "Lead Source"),
+		'contact' => array("Name", "Phone Number", "Email Address", "Message", "Form URL", "Lead Source")
+	);
+
+	$forms = GFAPI::get_forms();
+    foreach ( $forms as $form) {
+
+        $ret .= '<tr>';
+		
+		
+		$match = '';
+		$client_label = '';
+		foreach ($expected_forms as $form_name) {
+			if(strpos(strtolower($form["title"]), $form_name) !== false){
+				$match = $form_name;
+				break;
+			}
+		}
+
+
+		$field_label = '';
+		$test_label = '';
+		if(!empty($match)){
+			// displays the types of every field in the form
+			$temp_fields = $expected_fields[$match];			
+			foreach ( $form['fields'] as $field ) {
+				$unset_label = $field->label;
+				if(($key = array_search($unset_label, $temp_fields)) !== false ) {
+					unset($temp_fields[$key]);
+					$test_label .= $field->label . ' / ';
+				}
+			}
+			if(is_array($temp_fields)) {
+				$lastfield = end($temp_fields);
+				foreach ($temp_fields as $missing_field) {
+					$field_label .= $missing_field;
+
+					if($missing_field != $lastfield) {
+						$field_label .= ', ';
+					}
+				}
+			}
+			// foreach ($temp_fields as $tf) {
+			// 	$test_label .= $tf;
+			// }
+		}
+
+		$client_label .= (!empty($field_label)) ? '<h4>Missing Fields</h4>' . $field_label : '';
+
+		$general = get_option("general");
+		if(!empty($general["business_owner_name"])) {
+			$client = false;
+			$notification_email = $general["notification_email"];
+			foreach ($form["notifications"] as $notification) {
+				$client	= ($notification["to"] == $notification_email) ? true : false;
+				if($client) { break; }
+			}
+			if(!$client) {
+				$client_label .= '<h4>No notification assigned for this client. </h4>';
+				$client_label .= '<strong>Notification Name</strong> "Notification for '.$general["business_owner_name"].'"<br>';
+				$client_label .= '<strong>Notification Send to Email Address</strong> "'.$notification_email.'"<br>';
+			}
+		} else {
+			$client_label .= '<h4>Notication Needed!</h4>';
+			$client_label .= 'Sorry, you need to add both business owner name and notitication email in City Page Pro General Settings';
+		}
+
+		$ret .= '<td>'.$form['title']. (!empty($match) ? ' <span class="hot"> hot </span>' : '') .'</td>';
+		$ret .= '<td>'.$client_label.'</td>';
+
+		$ret .= '<td class="actions">';
+		$ret .= ' <a href="admin.php?page=gf_edit_forms&id='.$form['id'].'">Edit</a> ';
+		$ret .= ' <a href="admin.php?page=gf_edit_forms&view=settings&id='.$form['id'].'">Settings</a> ';
+		$ret .= ' <a href="admin.php?page=gf_edit_forms&view=settings&subview=notification&id='.$form['id'].'">Notifications</a> ';
+		$ret .= '</td>';
+		$ret .= '</tr>'; //end of TR
+    }
+
+	$ret .= '</table>'; //end of TABLE
 	echo toolbox_content($ret, 'reports');
+
+
+	$to = 'nimitz@webnotik.com';
+	$subject = 'The subject';
+	$headers = array('Content-Type: text/html; charset=UTF-8', 'From: Alex &lt;alex@brightstarinvestors.com');
+	 
+	wp_mail( $to, $subject, $ret, $headers );
+
+
 }
 
  
@@ -531,3 +718,53 @@ function toolbox_old_information_callback() {
 	$ret = 'Something awesome is coming here.';
 	echo toolbox_content($ret, 'old-information');
 }
+
+
+function priority_checker($items, $active) {
+	foreach ($items as $item) {
+		if(strpos(strtolower($active), $item) !== false) {
+			//we need to make sure that its not on the thank you page
+			if(strpos(strtolower($active), 'thank') !== false) {
+				//we continue search
+			} else {
+				return true;
+				break;
+			}
+		}
+	}
+	return false;
+}
+
+function string_verify($words, $needle) {
+	// Test if string contains the word 
+	if(strpos($words, $needle) !== false){
+	    return true;
+	} else{
+	    return false;
+	}
+}
+
+
+//Display admin notices 
+function city_page_pro_admin_notice() {
+	$general = array("business_name", "business_phone_number", "business_email_address", "business_map", "business_logo_url", "business_owner_name", "notification_email");
+	$general_data = get_option('general');
+
+
+	$ret = '';
+	foreach ($general as $key) {
+		$value = $general_data[$key];
+		$notice = "warning";
+		if( empty($value) ) {
+			$label = str_replace("_", " ", $key);
+
+			$ret .= '<div class="notice notice-'.$notice.'">';
+			$ret .= '<p>Sorry, you don\'t have any informatin for <b>'. ucfirst($label) .'</b></p>';
+			$ret .= '</div>';
+		}
+		
+	}
+         
+	echo $ret;
+}
+add_action( 'admin_notices', 'city_page_pro_admin_notice' );

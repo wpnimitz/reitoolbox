@@ -2,14 +2,14 @@
 /*
    Plugin Name: City Page Pro
    Plugin URI: https://topresultsconsulting.com
-   Version: 1.5.1
+   Version: 1.6
    Author: Nimitz Batioco
    Author URI: https://wpnimitz.com
    License: GPL2
 */
 
  /*
-	I still need to clean this up but I still don't have time.
+	I still need to clean this up but I don't have time.
  */
 
 // include_once("plugins/webnotik.php");
@@ -17,7 +17,7 @@ include_once("plugins/toolbox.php");
 include_once("plugins/shortcode.php");
 include_once("plugins/metabox.php");
 include_once("includes/comparison.php");
-include_once("includes/crm-realeflow.php");
+//include_once("includes/crm-realeflow.php");
 
 define( 'CITYPRO_PATH', plugin_dir_path( __FILE__ ) );
 define( 'CITYPRO_URL', plugin_dir_url( __FILE__ ) );
