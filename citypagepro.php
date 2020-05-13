@@ -2,7 +2,7 @@
 /*
    Plugin Name: City Page Pro
    Plugin URI: https://topresultsconsulting.com
-   Version: 1.6
+   Version: 1.5.7
    Author: Nimitz Batioco
    Author URI: https://wpnimitz.com
    License: GPL2

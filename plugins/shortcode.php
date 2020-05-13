@@ -8,7 +8,20 @@ function webnotik_form_shortcode( $atts ){
 	$type = $atts["type"];
 	$source = $atts["source"];
 
-	$allowed_types = array('seller_form', 'buyer_form', 'private_lending_form', 'contractor_form', 'realtors_form', 'wholesale_form' , 'contact_form', 'extra_form');
+	$allowed_types = array(
+		'seller_form', 
+		'buyer_form', 
+		'private_lending_form', 
+		'contractor_form', 
+		'realtors_form', 
+		'wholesale_form' , 
+		'contact_form', 
+		'extra_form', 
+		'extra_form_2', 
+		'extra_form_3', 
+		'extra_form_4', 
+		'extra_form_5'
+	);
 
 	if(in_array($type, $allowed_types)) {
 		$forms = get_option('forms');

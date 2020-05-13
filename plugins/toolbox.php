@@ -477,6 +477,10 @@ function toolbox_forms_callback() {
 	$ret .= toolbox_fields('textarea', 'Wholesale Form', 'forms', array('help' => '[webnotik_form type="wholesale_form"]'));
 	$ret .= toolbox_fields('textarea', 'Contact Form', 'forms', array('help' => '[webnotik_form type="contact_form"]'));
 	$ret .= toolbox_fields('textarea', 'Extra Form', 'forms', array('help' => '[webnotik_form type="extra_form"]'));
+	$ret .= toolbox_fields('textarea', 'Extra Form 2', 'forms', array('help' => '[webnotik_form type="extra_form_2"]'));
+	$ret .= toolbox_fields('textarea', 'Extra Form 3', 'forms', array('help' => '[webnotik_form type="extra_form_3"]'));
+	$ret .= toolbox_fields('textarea', 'Extra Form 4', 'forms', array('help' => '[webnotik_form type="extra_form_4"]'));
+	$ret .= toolbox_fields('textarea', 'Extra Form 5', 'forms', array('help' => '[webnotik_form type="extra_form_5"]'));
 
 	$ret .= get_submit_button();	
 
